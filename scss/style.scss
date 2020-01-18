@@ -1,0 +1,192 @@
+@import 'normalize.scss';
+
+// === Mixins ===
+@mixin main-font(){
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+}
+@mixin section_paddings(){
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+// === Mixins ===
+
+// === Commom ===
+.section-outer {
+    padding-right: 20px;
+    padding-left: 20px;
+}
+.section-inner{
+    max-width: 1160px;
+    margin: 0 auto;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    @include main-font();
+}
+// === Commom ===
+
+
+// === Header ===
+.section-header{   
+
+    background-color: #f6f9f9;
+        &__top-logo{
+        padding-top: 34px;
+        padding-bottom: 34px;
+        display: flex;
+        align-items: center;
+        font-size: 30px;
+        color: #2d3950;
+        line-height:34px;
+        text-transform: uppercase;
+        
+        img{
+            margin-right: 20px;
+        }
+    }
+
+}
+
+// === Header ===
+// === Banner ===
+
+.section-banner{
+        background: url('../img/Image.png') no-repeat  50% 50%;
+        background-size: cover;
+        position: relative;
+        .section-inner{
+            height: calc(100vh - 102px);
+            position: relative;
+            z-index:10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        &__title{
+            font-size: 120px;
+            color: #fff;
+            text-transform: uppercase;
+            line-height: 124px;
+            border-bottom: 2px solid #15a4fa;
+            padding: 10px 95px;
+        }
+        &__text{
+            font-size: 20px;
+            line-height: 24px;
+            color: #fff;
+            margin-top: 40px;
+        }
+        &__btn{
+            margin-top: 65px;
+            button{
+                font-size: 20px;
+                color: #fff;
+                border:none;
+                background-color: #15a4fa;
+                padding: 20px 32px;
+                border-radius: 5px;
+            }
+;
+        }
+    
+}
+
+// === Banner ===
+
+// === description ===
+.section-description{
+    @include section_paddings();
+    background-color: #f6f9f9;
+    .section-inner{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        text-align: center;
+    }
+    &__title{
+        color: #2d3950;
+        font-size:40px;
+        margin-bottom: 30px;
+    }
+    &__text{
+        color: #999999;
+        font-size:20px;
+        
+    }
+}
+// === description ===
+// === features ===
+.section-features{
+    @include section_paddings();
+    &__list{
+        display: flex;
+
+        
+        justify-content: space-between;
+        &-item{
+            text-align: center;
+            
+            &-img{
+                margin-bottom: 32px;
+            }
+            &-title{
+                font-size: 22px;
+                color: #2d3950;
+                margin-bottom: 26px;
+            }
+            &-text{
+                font-size: 15px;
+                color: #999999;
+                width: 80%;
+                margin: 0 auto;
+            }
+        }
+        &-item + &-item{
+            margin-left: 20px;
+        }
+    }
+}
+
+
+// === features ===
+
+// === portfolio ===
+.section-portfolio{
+    @include section_paddings();
+    background-color: #f6f9f9;
+    .section-inner{
+        text-align: center;
+    }
+    &__title{
+        font-size: 40px;
+        color: #2d3950;
+        margin-bottom: 25px;
+    }
+    &__text{        
+        font-size: 15px;
+        color: #999999;
+        margin-bottom: 80px;}
+    &__gallery{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        &-img{
+            margin-bottom: 30px;
+            margin-left: 30px;
+        }
+        &-img:first-child, &-img:last-child{
+            margin-left: 0;
+        }
+    }
+}
+
+// === portfolio ===
