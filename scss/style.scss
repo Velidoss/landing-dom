@@ -28,6 +28,12 @@
 body{
     @include main-font();
 }
+.btn-main{
+        color: #fff;
+        border:none;
+        background-color: #15a4fa;
+        border-radius: 5px;
+}
 // === Commom ===
 
 
@@ -85,15 +91,10 @@ body{
         }
         &__btn{
             margin-top: 65px;
-            button{
-                font-size: 20px;
-                color: #fff;
-                border:none;
-                background-color: #15a4fa;
+            .btn-main{
                 padding: 20px 32px;
-                border-radius: 5px;
+                font-size: 20px;
             }
-;
         }
     
 }
@@ -108,7 +109,6 @@ body{
         display: flex;
         flex-direction: column;
         align-items: center;
-
         text-align: center;
     }
     &__title{
@@ -194,3 +194,112 @@ body{
 }
 
 // === portfolio ===
+
+// === contact === 
+.section-contact{
+    @include section_paddings();
+    background: url('../img/bgcontact.png') no-repeat 50% 50%;
+    background-size:cover ;
+    position: relative;
+    &::before{
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        z-index: 5;
+        left: 0;
+        right: 0;
+        background-color: rgba(45, 57, 80, .9);
+    }
+    .section-inner{
+        z-index: 10;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 560px;
+    }
+    &__title{
+        font-size: 40px;
+        color: #fff;
+        margin-bottom: 20px;
+    }
+    &__text{        
+        font-size: 15px;
+        color: #676b75;
+        margin-bottom: 50px;
+    }
+        &__contact{
+            width: 100%;
+            &-form{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                max-width: 100%;
+                &-input{
+                    margin-bottom: 22px;
+                    width: 100%;
+                    font-size: 15;
+                    color: #999999;
+                    line-height: 60px;
+                    padding: 0 20px;
+                    background: none;
+                    border: 1px solid #999999;
+                    border-radius: 4px;
+                }
+                &-textarea{
+                    margin-bottom: 22px;
+                    width: 100%;
+                    font-size: 15;
+                    color: #999999;
+                    line-height: 20px;
+                    padding: 20px 20px;
+                    background: none;
+                    border: 1px solid #999999;
+                    border-radius: 4px;
+                }
+                &-buttons{
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    .checkbox{
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        color: #fff;
+                        input{
+                            margin-right:  15px;
+                            width: 18px;
+                            height: 18px;
+                        }
+                        }
+                        .btn-main{
+                            padding: 18px 50px;
+                            font-size: 18px;
+                        }
+                    }
+                }
+            }
+        }
+        
+
+
+// === contact === 
+
+// === footer === 
+.section-footer{
+    padding-top: 40px;
+    padding-bottom: 40px;
+    .section-inner{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__copyright{
+        font-size: 15px;
+        color:#999999;
+    }
+}
+
+// === footer === 
