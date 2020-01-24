@@ -1,0 +1,14 @@
+{
+    "sqltools.connections": [
+        {
+            "askForPassword": true,
+            "connectionTimeout": 0,
+            "database": "velidoss",
+            "dialect": "MySQL",
+            "name": "Mysql local",
+            "port": 3306,
+            "server": "localhost",
+            "username": "root"
+        }
+    ]
+}

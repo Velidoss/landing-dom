@@ -542,6 +542,7 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  max-width: 600px;
 }
 
 .section-banner__title {
@@ -551,16 +552,41 @@ body {
   line-height: 124px;
   border-bottom: 2px solid #15a4fa;
   padding: 10px 95px;
+  max-width: 100%;
 }
 
 @media (max-width: 575px) {
   .section-banner__title {
     padding: 10px 0;
+    font-size: 80px;
+    line-height: 84px;
   }
 }
 
 @media (max-width: 767px) {
   .section-banner__title {
+    padding: 10px 15px;
+  }
+}
+
+.section-banner__subtitle {
+  font-size: 70px;
+  color: #fff;
+  text-transform: uppercase;
+  line-height: 84px;
+  padding: 10px 95px;
+}
+
+@media (max-width: 575px) {
+  .section-banner__subtitle {
+    padding: 10px 0;
+    font-size: 60px;
+    line-height: 64px;
+  }
+}
+
+@media (max-width: 767px) {
+  .section-banner__subtitle {
     padding: 10px 15px;
   }
 }
@@ -571,6 +597,59 @@ body {
   color: #fff;
   margin-top: 40px;
   text-align: center;
+}
+
+.section-banner__register {
+  width: 500px;
+}
+
+@media (max-width: 767px) {
+  .section-banner__register {
+    width: 300px;
+  }
+}
+
+.section-banner__register-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  max-width: 100%;
+}
+
+.section-banner__register-form input {
+  margin-bottom: 22px;
+  font-size: 15;
+  color: #dadada;
+  line-height: 60px;
+  padding: 0 20px;
+  background: rgba(45, 57, 80, 0.5);
+  border: 1px solid #999999;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.section-banner__register-form .btn-main {
+  padding: 20px 32px;
+  font-size: 20px;
+}
+
+@media (max-width: 767px) {
+  .section-banner__register-form .btn-main {
+    padding: 10px 32px;
+  }
+  .section-banner__register-form input {
+    line-height: 40px;
+  }
 }
 
 .section-banner__btn {
