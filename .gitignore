@@ -6,3 +6,5 @@
 *.sass.map
 *.scss.map
 *.sql
+
+db.php
