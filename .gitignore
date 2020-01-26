@@ -1,4 +1,8 @@
 .sass-cache/
+.vscode/
+.idea/
+
 *.css.map
 *.sass.map
 *.scss.map
+*.sql

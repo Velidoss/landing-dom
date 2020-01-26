@@ -1,5 +1,7 @@
 <?php
 
+
+
 class Controller
 {
     public $model;
@@ -7,8 +9,9 @@ class Controller
 
     public function __construct()
     {
+        
         $this->view = new View();
-        echo 'создан обект класса view';
+        
     }
     public function actionIndex()
     {
