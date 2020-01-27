@@ -37,6 +37,7 @@ class ModelUser extends Dbh{
                 session_start();
                 $_SESSION['userId'] = $user['idUsers'];
                 $_SESSION['userUid'] = $user['uidUsers'];
+                $_SESSION['count'] = 0;
                 header('Location: /user/account');
                 echo "Вы авторизованы в системе!";
                 exit();
@@ -46,5 +47,6 @@ class ModelUser extends Dbh{
             }
         }
     }
+
 
 }

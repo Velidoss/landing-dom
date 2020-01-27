@@ -71,5 +71,13 @@ class ControllerUser extends Controller
             }
         }
     }
+    public function actionLogout(){
+        if(isset($_POST['logout-submit'])){
+            $_SESSION = [];
+            session_destroy();
+            header("Location: /");
+        }
+
+    }
 
 }

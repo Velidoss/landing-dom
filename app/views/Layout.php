@@ -26,6 +26,14 @@
                     <li><a href="/user/register">Signup</a></li>
                     <li><a href="/user/login">Login</a></li>
                     <li><a href="/main/about">About</a></li>
+                    <?php if(isset($_SESSION['userId'])){?>
+                    <li><a href="/user/account">Account</a></li>
+                    <li> 
+                        <form action="/user/logout" method="POST"> 
+                            <button class="logout-btn" name="logout-submit" type="submit">Logout</button>  
+                        </form> 
+                    </li>
+                    <?php };?>
                 </ul>
             </nav>
             <div class="section-header__toggler">
