@@ -13,7 +13,7 @@
 <body>
     <?php
     var_dump($_SERVER['REQUEST_URI']);
-
+    var_dump($_SESSION);
     ?>
     <!-- header -->
     <section class="section-outer section-header">
@@ -22,6 +22,7 @@
                 <img src="/img/Blue Top.png" alt="img-logo" />Strict </div>
             <nav class="section-header__top-nav">
                 <ul class="section-header__top-nav-menu">
+                    <li><a href="/">Home</a></li>
                     <li><a href="/user/register">Signup</a></li>
                     <li><a href="/user/login">Login</a></li>
                     <li><a href="/main/about">About</a></li>
@@ -33,11 +34,12 @@
                 </button>
             </div>
         </div>
-    </section>
+    </section>  
     <!-- header -->
     <!-- toggle-menu -->
     <div class="toggle">
         <ul class="toggle-menu">
+            <li><a href="/">Home</a></li>
             <li><a href="/user/register">Signup</a></li>
             <li><a href="/user/login">Login</a></li>
             <li><a href="/main/about">About</a></li>
@@ -45,8 +47,7 @@
     </div>
     <!-- toggle-menu -->
     <?php
-    include 'app/views/' . $contentView;
-    ?>
+    include 'app/views/' . $contentView;?>
     <!-- contact -->
     <section class="section-outer section-contact">
         <div class="section-inner">

@@ -1,6 +1,7 @@
 <?php
+session_start();
 
-ini_set('display_errors', 1);
 require_once 'app/boot.php';
+ini_set('display_errors', 1);
+var_dump($_SESSION);
 
-$a = explode('/', $_SERVER['REQUEST_URI']);

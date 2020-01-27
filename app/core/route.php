@@ -21,7 +21,7 @@ class Route
         $modelName = 'Model' . ucfirst($controllerName);
         $controllerName = 'Controller' . ucfirst($controllerName);
         $actionName = 'action' . ucfirst($actionName);
-        var_dump($actionName);
+       
 
         $modelFile = ucfirst($modelName) . '.php';
         $modelPath = "app/models/" . ucfirst($modelFile);

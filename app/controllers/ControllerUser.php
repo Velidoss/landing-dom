@@ -22,15 +22,54 @@ class ControllerUser extends Controller
         $this->view->generate('Login.php', 'Layout.php');
         
     }
+    public function actionAccount()
+    {
+        if(isset($_SESSION['userUid'])){
+            $this->view->generate('Account.php', 'Layout.php');
+        }else{
+            header("Location: /");
+        }
+        
+        
+    }
 
     public function actionRegisterUser(){
-        $errors=[];
-        $username = $_POST['username'];
-        $email = $_POST['email'];
-        $password = $_POST['pwd'];
-        $passwordRepeat = $_POST['pwd-repeat'];
-        var_dump([$username,$email ,$password]);
-        $this->model->registerUser($username,$email ,$password );
+        if (isset($_POST['register-submit'])){
+            
+            $username = trim($_POST['username']);
+            $email = trim($_POST['email']);
+            $password = trim($_POST['pwd']);
+            $passwordRepeat = trim($_POST['pwd-repeat']);
+            if(empty($username) || empty($email) || empty($password) || empty($passwordRepeat)){
+                die("Заполните все поля.") ;
+            }
+            elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                die("Некоретное название почтового ящика.") ;
+            }
+            elseif( !preg_match("/^[a-zA-Z0-9]*$/", $username)){
+                die("Некоректное имя пользователя (допустимы только буквы и цифры).") ;
+            }
+            elseif( $password !== $passwordRepeat ){
+                
+                die("Пароли не совпадают.") ;
+            }else{
+                $this->model->registerUser($username,$email ,$password );
+            }
+            
+        }
+        echo 'Вы успешно зарегистрировались';
+
+    }
+    public function actionLoginUser(){
+        if(isset($_POST['login-submit'])){
+            $username = trim($_POST['username']);
+            $password = trim($_POST['pwd']);
+            if(empty($username) || empty($password)){
+                die("Для входа введите логин и пароль.") ;
+            }else{
+                $this->model->loginUser($username,$password );
+            }
+        }
     }
 
 }

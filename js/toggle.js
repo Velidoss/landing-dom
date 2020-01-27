@@ -7,7 +7,7 @@ let ToggleNav = function() {
   
 
   if (toggleNavStatus === false) {
-    getToggleBar.style.height = "200px";
+    getToggleBar.style.height = "280px";
     getToggleBarMenu .style.visibility = "visible";
 
 

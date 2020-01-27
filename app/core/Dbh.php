@@ -13,7 +13,7 @@ class Dbh{
             $this->db->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );  
         }catch(PDOException $ex){
             echo 'Невозможно установить соединение с базой данных'.$ex->getMessage();
-            file_put_contents('PDOErrors.txt', $e->getMessage(), FILE_APPEND);  
+            file_put_contents('PDOErrors.txt', $ex->getMessage(), FILE_APPEND);  
         }
     }
 
