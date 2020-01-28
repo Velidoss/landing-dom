@@ -21,19 +21,19 @@ class Route
         $modelName = 'Model' . ucfirst($controllerName);
         $controllerName = 'Controller' . ucfirst($controllerName);
         $actionName = 'action' . ucfirst($actionName);
-        var_dump($actionName);
+
 
         $modelFile = ucfirst($modelName) . '.php';
         $modelPath = "app/models/" . ucfirst($modelFile);
         if (file_exists($modelPath)) {
-            include 'app/models/' . ucfirst($modelFile);
+            include_once 'app/models/' . ucfirst($modelFile);
         }
 
         $controllerFile = ucfirst($controllerName) . '.php';
         $controllerPath = "app/controllers/" . ucfirst($controllerFile);
 
         if (file_exists($controllerPath)) {
-            include 'app/controllers/' . ucfirst($controllerFile);
+            include_once 'app/controllers/' . ucfirst($controllerFile);
         } else {
             Route::errorPage404();
         }

@@ -449,6 +449,15 @@ body {
   font-size: 20px;
 }
 
+.section-header__top-nav-menu li form button {
+  background: none;
+  border: none;
+  text-transform: uppercase;
+  color: #2d3950;
+  font-size: 20px;
+  cursor: pointer;
+}
+
 @media (max-width: 575px) {
   .section-header__top-nav {
     display: none;
@@ -515,18 +524,24 @@ body {
   font-size: 20px;
 }
 
+.toggle-menu li form button {
+  background: none;
+  border: none;
+  text-transform: uppercase;
+  color: #2d3950;
+  font-size: 20px;
+  cursor: pointer;
+}
+
 @media (min-width: 576px) {
   .toggle {
     display: none;
   }
 }
 
-.section-banner {
-  background: url("../img/Image.png") no-repeat 50% 50%;
-  background-size: cover;
-}
-
-.section-banner .section-inner {
+.section-banner .section-inner,
+.section-register .section-inner,
+.section-login .section-inner {
   height: calc(100vh - 102px);
   z-index: 10;
   display: -webkit-box;
@@ -543,9 +558,12 @@ body {
       -ms-flex-align: center;
           align-items: center;
   max-width: 600px;
+  position: relative;
 }
 
-.section-banner__title {
+.section-banner__title,
+.section-register__title,
+.section-login__title {
   font-size: 120px;
   color: #fff;
   text-transform: uppercase;
@@ -556,7 +574,9 @@ body {
 }
 
 @media (max-width: 575px) {
-  .section-banner__title {
+  .section-banner__title,
+  .section-register__title,
+  .section-login__title {
     padding: 10px 0;
     font-size: 80px;
     line-height: 84px;
@@ -564,12 +584,16 @@ body {
 }
 
 @media (max-width: 767px) {
-  .section-banner__title {
+  .section-banner__title,
+  .section-register__title,
+  .section-login__title {
     padding: 10px 15px;
   }
 }
 
-.section-banner__subtitle {
+.section-banner__subtitle,
+.section-register__subtitle,
+.section-login__subtitle {
   font-size: 70px;
   color: #fff;
   text-transform: uppercase;
@@ -578,7 +602,9 @@ body {
 }
 
 @media (max-width: 575px) {
-  .section-banner__subtitle {
+  .section-banner__subtitle,
+  .section-register__subtitle,
+  .section-login__subtitle {
     padding: 10px 0;
     font-size: 60px;
     line-height: 64px;
@@ -586,12 +612,16 @@ body {
 }
 
 @media (max-width: 767px) {
-  .section-banner__subtitle {
+  .section-banner__subtitle,
+  .section-register__subtitle,
+  .section-login__subtitle {
     padding: 10px 15px;
   }
 }
 
-.section-banner__text {
+.section-banner__text,
+.section-register__text,
+.section-login__text {
   font-size: 20px;
   line-height: 24px;
   color: #fff;
@@ -599,17 +629,29 @@ body {
   text-align: center;
 }
 
-.section-banner__register {
+.section-banner__register, .section-banner__login,
+.section-register__register,
+.section-register__login,
+.section-login__register,
+.section-login__login {
   width: 500px;
 }
 
 @media (max-width: 767px) {
-  .section-banner__register {
+  .section-banner__register, .section-banner__login,
+  .section-register__register,
+  .section-register__login,
+  .section-login__register,
+  .section-login__login {
     width: 300px;
   }
 }
 
-.section-banner__register-form {
+.section-banner__register-form, .section-banner__login-form,
+.section-register__register-form,
+.section-register__login-form,
+.section-login__register-form,
+.section-login__login-form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -626,39 +668,91 @@ body {
   max-width: 100%;
 }
 
-.section-banner__register-form input {
+.section-banner__register-form input, .section-banner__login-form input,
+.section-register__register-form input,
+.section-register__login-form input,
+.section-login__register-form input,
+.section-login__login-form input {
   margin-bottom: 22px;
   font-size: 15;
   color: #dadada;
   line-height: 60px;
   padding: 0 20px;
-  background: rgba(45, 57, 80, 0.5);
+  background: rgba(45, 57, 80, 0.9);
   border: 1px solid #999999;
   border-radius: 4px;
   width: 100%;
 }
 
-.section-banner__register-form .btn-main {
+.section-banner__register-form .btn-main, .section-banner__login-form .btn-main,
+.section-register__register-form .btn-main,
+.section-register__login-form .btn-main,
+.section-login__register-form .btn-main,
+.section-login__login-form .btn-main {
   padding: 20px 32px;
   font-size: 20px;
 }
 
 @media (max-width: 767px) {
-  .section-banner__register-form .btn-main {
+  .section-banner__register-form .btn-main, .section-banner__login-form .btn-main,
+  .section-register__register-form .btn-main,
+  .section-register__login-form .btn-main,
+  .section-login__register-form .btn-main,
+  .section-login__login-form .btn-main {
     padding: 10px 32px;
   }
-  .section-banner__register-form input {
+  .section-banner__register-form input, .section-banner__login-form input,
+  .section-register__register-form input,
+  .section-register__login-form input,
+  .section-login__register-form input,
+  .section-login__login-form input {
     line-height: 40px;
   }
 }
 
-.section-banner__btn {
+.section-banner__btn,
+.section-register__btn,
+.section-login__btn {
   margin-top: 65px;
 }
 
-.section-banner__btn .btn-main {
+.section-banner__btn .btn-main,
+.section-register__btn .btn-main,
+.section-login__btn .btn-main {
   padding: 20px 32px;
   font-size: 20px;
+}
+
+.section-banner {
+  background: url("/img/Image.png") no-repeat 50% 50%;
+  background-size: cover;
+}
+
+.section-register {
+  background: url("/img/banner-2.jpg") no-repeat 50% 50%;
+  background-size: cover;
+}
+
+.section-login {
+  background: url("/img/banner-3.jpg") no-repeat 50% 50%;
+  background-size: cover;
+}
+
+.section-register,
+.section-login {
+  position: relative;
+}
+
+.section-register::before,
+.section-login::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 5;
+  left: 0;
+  right: 0;
+  background-color: rgba(45, 57, 80, 0.5);
 }
 
 .section-description {
@@ -854,7 +948,7 @@ body {
 .section-contact {
   padding-top: 80px;
   padding-bottom: 80px;
-  background: url("../img/bgcontact.png") no-repeat 50% 50%;
+  background: url("/img/bgcontact.png") no-repeat 50% 50%;
   background-size: cover;
   position: relative;
   max-width: 100%;
@@ -1007,5 +1101,163 @@ body {
 .section-footer__copyright {
   font-size: 15px;
   color: #999999;
+}
+
+.section-account {
+  padding-top: 80px;
+  padding-bottom: 80px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background: url("/img/banner-4.jpg") no-repeat 50% 50%;
+  background-size: cover;
+  position: relative;
+}
+
+@media (max-width: 767px) {
+  .section-account {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+}
+
+.section-account::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 5;
+  left: 0;
+  right: 0;
+  background-color: rgba(60, 62, 66, 0.9);
+}
+
+.section-account .section-inner {
+  width: 100%;
+  z-index: 10;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  height: calc(100% - 102px);
+  position: relative;
+}
+
+.section-account__userinfo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 200px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+  -webkit-box-flex: 2;
+      -ms-flex-positive: 2;
+          flex-grow: 2;
+  margin-right: 20px;
+}
+
+.section-account__userinfo-img {
+  margin-bottom: 20px;
+}
+
+.section-account__userinfo-img img {
+  width: 120px;
+  height: 120px;
+}
+
+.section-account__userinfo-data p {
+  margin-top: 10px;
+  font-size: 15px;
+  color: #999999;
+}
+
+.section-account__userstatistics {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 4;
+      -ms-flex-positive: 4;
+          flex-grow: 4;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.section-account__userstatistics-tabs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.section-account__userstatistics-tabs-tablink {
+  border: 1px solid #999999;
+  background: none;
+  outline: none;
+  padding: 10px 20px;
+  color: #999999;
+  border-radius: 5px 5px 0 0;
+}
+
+.section-account__userstatistics-tabcontent {
+  border-top: 1px solid #999999;
+  padding-top: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-flow: row wrap;
+      flex-flow: row wrap;
+}
+
+.section-account__userstatistics-tabcontent .tab-item {
+  -ms-flex-preferred-size: 150px;
+      flex-basis: 150px;
+  padding-top: 10px;
+  text-align: center;
+}
+
+.section-account__userstatistics-tabcontent .tab-item .active {
+  background-color: rgba(45, 57, 80, 0.3);
+}
+
+.section-account__userstatistics-tabcontent .tab-item p {
+  font-size: 15px;
+  color: #999999;
+}
+
+.section-account__userstatistics #posts {
+  display: none;
+}
+
+.section-account__userstatistics #comments {
+  display: none;
 }
 /*# sourceMappingURL=style.css.map */
