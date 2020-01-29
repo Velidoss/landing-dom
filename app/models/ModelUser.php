@@ -47,6 +47,35 @@ class ModelUser extends Dbh{
             }
         }
     }
+    public function domainRegister($domainRegistrarId, $domainTimeReg, $domainName, $domainZone){
+        $sql = "SELECT domainName FROM domains WHERE domainName=?;";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(1, $domainName);
+        $stmt->execute();
+        
+        $domainCheck = $stmt->fetch();
+        if($domainCheck){
+            header("Location: ../user/domainreg");
+            echo 'Это доменное имя уже зарегистрировано!';
+            exit();
+        }else{
+            $sql = "INSERT into domains (domainRegistrantId, domainName, domainZone, domainTimeReg) VALUES (?,?,?,?);";
+            $stmt= $this->db->prepare($sql);
+            $stmt->execute([$domainRegistrarId, $domainName, $domainZone,  $domainTimeReg]);
+            header("Location: ../user/domainreg");
+            echo 'Доменное имя успешно зарегистрировано!';
+            exit();
+        }
+    }
 
 
+
+    public function selectDomains($userId){
+        $sql = "SELECT domainName, domainZone FROM domains WHERE domainRegistrantId=?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(1, $userId);
+        $stmt->execute([$userId]);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
 }

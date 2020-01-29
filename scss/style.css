@@ -541,7 +541,8 @@ body {
 
 .section-banner .section-inner,
 .section-register .section-inner,
-.section-login .section-inner {
+.section-login .section-inner,
+.section-domainreg .section-inner {
   height: calc(100vh - 102px);
   z-index: 10;
   display: -webkit-box;
@@ -563,7 +564,8 @@ body {
 
 .section-banner__title,
 .section-register__title,
-.section-login__title {
+.section-login__title,
+.section-domainreg__title {
   font-size: 120px;
   color: #fff;
   text-transform: uppercase;
@@ -576,7 +578,8 @@ body {
 @media (max-width: 575px) {
   .section-banner__title,
   .section-register__title,
-  .section-login__title {
+  .section-login__title,
+  .section-domainreg__title {
     padding: 10px 0;
     font-size: 80px;
     line-height: 84px;
@@ -586,14 +589,16 @@ body {
 @media (max-width: 767px) {
   .section-banner__title,
   .section-register__title,
-  .section-login__title {
+  .section-login__title,
+  .section-domainreg__title {
     padding: 10px 15px;
   }
 }
 
 .section-banner__subtitle,
 .section-register__subtitle,
-.section-login__subtitle {
+.section-login__subtitle,
+.section-domainreg__subtitle {
   font-size: 70px;
   color: #fff;
   text-transform: uppercase;
@@ -604,7 +609,8 @@ body {
 @media (max-width: 575px) {
   .section-banner__subtitle,
   .section-register__subtitle,
-  .section-login__subtitle {
+  .section-login__subtitle,
+  .section-domainreg__subtitle {
     padding: 10px 0;
     font-size: 60px;
     line-height: 64px;
@@ -614,14 +620,16 @@ body {
 @media (max-width: 767px) {
   .section-banner__subtitle,
   .section-register__subtitle,
-  .section-login__subtitle {
+  .section-login__subtitle,
+  .section-domainreg__subtitle {
     padding: 10px 15px;
   }
 }
 
 .section-banner__text,
 .section-register__text,
-.section-login__text {
+.section-login__text,
+.section-domainreg__text {
   font-size: 20px;
   line-height: 24px;
   color: #fff;
@@ -629,29 +637,44 @@ body {
   text-align: center;
 }
 
-.section-banner__register, .section-banner__login,
+.section-banner__register, .section-banner__login, .section-banner__regaction,
 .section-register__register,
 .section-register__login,
+.section-register__regaction,
 .section-login__register,
-.section-login__login {
+.section-login__login,
+.section-login__regaction,
+.section-domainreg__register,
+.section-domainreg__login,
+.section-domainreg__regaction {
   width: 500px;
 }
 
 @media (max-width: 767px) {
-  .section-banner__register, .section-banner__login,
+  .section-banner__register, .section-banner__login, .section-banner__regaction,
   .section-register__register,
   .section-register__login,
+  .section-register__regaction,
   .section-login__register,
-  .section-login__login {
+  .section-login__login,
+  .section-login__regaction,
+  .section-domainreg__register,
+  .section-domainreg__login,
+  .section-domainreg__regaction {
     width: 300px;
   }
 }
 
-.section-banner__register-form, .section-banner__login-form,
+.section-banner__register-form, .section-banner__login-form, .section-banner__regaction-form,
 .section-register__register-form,
 .section-register__login-form,
+.section-register__regaction-form,
 .section-login__register-form,
-.section-login__login-form {
+.section-login__login-form,
+.section-login__regaction-form,
+.section-domainreg__register-form,
+.section-domainreg__login-form,
+.section-domainreg__regaction-form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -668,11 +691,16 @@ body {
   max-width: 100%;
 }
 
-.section-banner__register-form input, .section-banner__login-form input,
+.section-banner__register-form input, .section-banner__login-form input, .section-banner__regaction-form input,
 .section-register__register-form input,
 .section-register__login-form input,
+.section-register__regaction-form input,
 .section-login__register-form input,
-.section-login__login-form input {
+.section-login__login-form input,
+.section-login__regaction-form input,
+.section-domainreg__register-form input,
+.section-domainreg__login-form input,
+.section-domainreg__regaction-form input {
   margin-bottom: 22px;
   font-size: 15;
   color: #dadada;
@@ -684,41 +712,58 @@ body {
   width: 100%;
 }
 
-.section-banner__register-form .btn-main, .section-banner__login-form .btn-main,
+.section-banner__register-form .btn-main, .section-banner__login-form .btn-main, .section-banner__regaction-form .btn-main,
 .section-register__register-form .btn-main,
 .section-register__login-form .btn-main,
+.section-register__regaction-form .btn-main,
 .section-login__register-form .btn-main,
-.section-login__login-form .btn-main {
+.section-login__login-form .btn-main,
+.section-login__regaction-form .btn-main,
+.section-domainreg__register-form .btn-main,
+.section-domainreg__login-form .btn-main,
+.section-domainreg__regaction-form .btn-main {
   padding: 20px 32px;
   font-size: 20px;
 }
 
 @media (max-width: 767px) {
-  .section-banner__register-form .btn-main, .section-banner__login-form .btn-main,
+  .section-banner__register-form .btn-main, .section-banner__login-form .btn-main, .section-banner__regaction-form .btn-main,
   .section-register__register-form .btn-main,
   .section-register__login-form .btn-main,
+  .section-register__regaction-form .btn-main,
   .section-login__register-form .btn-main,
-  .section-login__login-form .btn-main {
+  .section-login__login-form .btn-main,
+  .section-login__regaction-form .btn-main,
+  .section-domainreg__register-form .btn-main,
+  .section-domainreg__login-form .btn-main,
+  .section-domainreg__regaction-form .btn-main {
     padding: 10px 32px;
   }
-  .section-banner__register-form input, .section-banner__login-form input,
+  .section-banner__register-form input, .section-banner__login-form input, .section-banner__regaction-form input,
   .section-register__register-form input,
   .section-register__login-form input,
+  .section-register__regaction-form input,
   .section-login__register-form input,
-  .section-login__login-form input {
+  .section-login__login-form input,
+  .section-login__regaction-form input,
+  .section-domainreg__register-form input,
+  .section-domainreg__login-form input,
+  .section-domainreg__regaction-form input {
     line-height: 40px;
   }
 }
 
 .section-banner__btn,
 .section-register__btn,
-.section-login__btn {
+.section-login__btn,
+.section-domainreg__btn {
   margin-top: 65px;
 }
 
 .section-banner__btn .btn-main,
 .section-register__btn .btn-main,
-.section-login__btn .btn-main {
+.section-login__btn .btn-main,
+.section-domainreg__btn .btn-main {
   padding: 20px 32px;
   font-size: 20px;
 }
@@ -738,6 +783,11 @@ body {
   background-size: cover;
 }
 
+.section-domainreg {
+  background: url("/img/banner-5.png") no-repeat 50% 50%;
+  background-size: cover;
+}
+
 .section-register,
 .section-login {
   position: relative;
@@ -753,6 +803,21 @@ body {
   left: 0;
   right: 0;
   background-color: rgba(45, 57, 80, 0.5);
+}
+
+.section-domainreg {
+  position: relative;
+}
+
+.section-domainreg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 5;
+  left: 0;
+  right: 0;
+  background-color: rgba(73, 73, 73, 0.9);
 }
 
 .section-description {
@@ -1148,7 +1213,7 @@ body {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  height: calc(100% - 102px);
+  height: calc(100vh - 399px);
   position: relative;
 }
 

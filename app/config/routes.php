@@ -20,4 +20,12 @@ return [
 		'controller' => 'user',
 		'action' => 'logout',
 	],
+	'user/account' => [
+		'controller' => 'user',
+		'action' => 'account',
+	],
+	'user/domainreg' => [
+		'controller' => 'user',
+		'action' => 'domainreg',
+	],
 ];

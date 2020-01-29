@@ -10,9 +10,4 @@ class ControllerMain extends Controller
         $this->view->generate('Main.php', 'Layout.php');
         
     }
-    public function actionAbout()
-    {
-        $this->view->generate('About.php', 'Layout.php');
-        
-    }
 }

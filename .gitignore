@@ -8,3 +8,4 @@
 *.sql
 
 db.php
+ PDOErrors.txt

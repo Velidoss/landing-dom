@@ -218,7 +218,8 @@ body {
 
 .section-banner,
 .section-register,
-.section-login {
+.section-login,
+.section-domainreg {
 
     .section-inner {
         height: calc(100vh - 102px);
@@ -278,7 +279,8 @@ body {
     }
 
     &__register,
-    &__login {
+    &__login,
+    &__regaction {
         width: 500px;
 
         @media (max-width:$screen-sm-max) {
@@ -349,9 +351,13 @@ body {
     background: url('/img/banner-3.jpg') no-repeat 50% 50%;
     background-size: cover;
 }
+.section-domainreg{
+    background: url('/img/banner-5.png') no-repeat 50% 50%;
+    background-size: cover;
+}
 
 .section-register,
-.section-login {
+.section-login{
     position: relative;
 
     &::before {
@@ -363,6 +369,20 @@ body {
         left: 0;
         right: 0;
         background-color: rgba(45, 57, 80, .5);
+    }
+}
+.section-domainreg {
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        z-index: 5;
+        left: 0;
+        right: 0;
+        background-color: rgba(73, 73, 73, 0.9);
     }
 }
 
@@ -656,7 +676,7 @@ body {
     background: url('/img/banner-4.jpg') no-repeat 50% 50%;
     background-size: cover;
     position: relative;
-
+    
     &::before {
         content: '';
         position: absolute;
@@ -675,7 +695,7 @@ body {
         flex-direction: row;
         justify-content: flex-start;
         align-items: flex-start;
-        height: calc(100% - 102px);
+        height: calc(100vh - 399px);
         position: relative;
     }
 

@@ -12,8 +12,8 @@
 
 <body>
     <?php
-    var_dump($_SERVER['REQUEST_URI']);
-    var_dump($_SESSION);
+    // var_dump($_SERVER['REQUEST_URI']);
+    // var_dump($_SESSION);
     ?>
     <!-- header -->
     <section class="section-outer section-header">
@@ -22,18 +22,22 @@
                 <img src="/img/Blue Top.png" alt="img-logo" />Strict </div>
             <nav class="section-header__top-nav">
                 <ul class="section-header__top-nav-menu">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/user/register">Signup</a></li>
-                    <li><a href="/user/login">Login</a></li>
-                    <li><a href="/main/about">About</a></li>
                     <?php if (isset($_SESSION['userId'])) { ?>
-                        <li><a href="/user/account">Account</a></li>
-                        <li>
-                            <form action="/user/logout" method="POST">
-                                <button class="logout-btn" name="logout-submit" type="submit">Logout</button>
-                            </form>
-                        </li>
-                    <?php }; ?>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/user/domainreg">Register domain name</a></li>
+                    <li><a href="/user/account">Account</a></li>
+                    <li>
+                        <form action="/user/logout" method="POST">
+                            <button class="logout-btn" name="logout-submit" type="submit">
+                                Logout
+                            </button>
+                        </form>
+                    </li>
+                    <?php }else{; ?>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/user/register">Signup</a></li>
+                        <li><a href="/user/login">Login</a></li>
+                    <?php } ?>
                 </ul>
             </nav>
             <div class="section-header__toggler">
@@ -47,11 +51,10 @@
     <!-- toggle-menu -->
     <div class="toggle">
         <ul class="toggle-menu">
-            <li><a href="/">Home</a></li>
-            <li><a href="/user/register">Signup</a></li>
-            <li><a href="/user/login">Login</a></li>
-            <li><a href="/main/about">About</a></li>
+
             <?php if (isset($_SESSION['userId'])) { ?>
+                <li><a href="/">Home</a></li>
+                <li><a href="/user/about">Register domain name</a></li>
                 <li><a href="/user/account">Account</a></li>
                 <li>
                     <form action="/user/logout" method="POST">
@@ -60,7 +63,11 @@
                         </button>
                     </form>
                 </li>
-            <?php }; ?>
+            <?php }else{; ?>
+                <li><a href="/">Home</a></li>
+                <li><a href="/user/domainreg">Signup</a></li>
+                <li><a href="/user/login">Login</a></li>
+            <?php } ?>
         </ul>
     </div>
     <!-- toggle-menu -->
