@@ -8,9 +8,12 @@
           <div class="section-account__userinfo-data">
             <div class="section-account__userinfo-data-item">
                 <?php  foreach($data['userData'] as $key=>$info){ ?>
-                         <p class="name-surname"><?php echo $info['userName'] ?> </p>
+                    <div class="data-item-info"><p class="name-surname"><?php echo $info['userName'] ?> </p></div>
                 <?php } ?>
-                <form action="/user/changeName" method="POST" >
+                <button type="submit" name="open-form">
+                        <img src="/img/svg/edit-solid.svg" alt="">
+                </button>
+                <form class="change-data-form" action="/user/changeName" method="POST" >
                     <input type="text" name="new-name">
                     <button type="submit" name="changeName-submit">
                         <img src="/img/svg/edit-solid.svg" alt="">
@@ -19,22 +22,28 @@
             </div>
             <div class="section-account__userinfo-data-item">
                 <?php foreach($data['userData'] as $key=>$info){ ?>
-                         <p class="name-age"><?php echo $info['userBrthDate'] ?> </p>
+                    <div class="data-item-info"><p class="name-age"><?php echo $info['userBrthDate'] ?> </p></div>
                 <?php } ?>
-
-                <form action="/user/changeDateBirth" method="POST" >
+                <button type="submit" name="open-form">
+                        <img src="/img/svg/edit-solid.svg" alt="">
+                </button>
+                <form class="change-data-form" action="/user/changeDateBirth" method="POST" >
                     <input type="text" name="new-birthdate">
                     <button type="submit" name="changeDateBirth-submit">
                         <img src="/img/svg/edit-solid.svg" alt="">
                     </button>
-                </form> </div>
+                </form> 
+            </div>
             <div class="section-account__userinfo-data-item"> 
                 <?php foreach($data['userData'] as $key=>$info){ ?>
-                         <p class="name-description"><?php echo $info['userInfo'] ?> </p>
-                <?php } ?>           
-                <form action="/user/changeData" method="POST">
+                         <div class="data-item-info"><p class="name-description"><?php echo $info['userInfo'] ?> </p></div>
+                <?php } ?>
+                <button type="submit" name="open-form">
+                        <img src="/img/svg/edit-solid.svg" alt="">
+                </button>           
+                <form class="change-data-form" action="/user/changeData" method="POST">
                     <textarea name="new-userdata" id="" cols="30" rows="4"></textarea>
-                    <button type="submit" name="changeData-submit">
+                    <button type="submit" name="changeData-submit" >
                         <img src="/img/svg/edit-solid.svg" alt="">
                     </button>
                 </form> 

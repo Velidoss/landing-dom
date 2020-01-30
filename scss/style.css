@@ -1267,15 +1267,36 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  -webkit-box-orient: vertical;
+  -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+      -ms-flex-direction: row;
+          flex-direction: row;
 }
 
-.section-account__userinfo-data-item p {
+.section-account__userinfo-data-item .data-item-info {
+  position: relative;
+}
+
+.section-account__userinfo-data-item .data-item-info p {
   font-size: 15px;
   color: #999999;
+}
+
+.section-account__userinfo-data-item button {
+  background: none;
+  border: none;
+  justify-self: flex-end;
+}
+
+.section-account__userinfo-data-item button img {
+  height: 20px;
+  width: 20px;
+  color: #999999;
+}
+
+.section-account__userinfo-data-item form {
+  position: absolute;
+  display: none;
 }
 
 .section-account__userinfo-data-item form button {
