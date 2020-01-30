@@ -6,12 +6,40 @@
             <img src="/img/anon.png" alt="anon" />
           </div>
           <div class="section-account__userinfo-data">
-            <p class="name-surname">John Doe</p>
-            <p class="name-age">19</p>
-            <p class="name-description">
-              I am a funny and self-motivated person. I like spending my time
-              with my dogo - Morty.
-            </p>
+            <div class="section-account__userinfo-data-item">
+                <?php  foreach($data['userData'] as $key=>$info){ ?>
+                         <p class="name-surname"><?php echo $info['userName'] ?> </p>
+                <?php } ?>
+                <form action="/user/changeName" method="POST" >
+                    <input type="text" name="new-name">
+                    <button type="submit" name="changeName-submit">
+                        <img src="/img/svg/edit-solid.svg" alt="">
+                    </button>
+                </form>
+            </div>
+            <div class="section-account__userinfo-data-item">
+                <?php foreach($data['userData'] as $key=>$info){ ?>
+                         <p class="name-age"><?php echo $info['userBrthDate'] ?> </p>
+                <?php } ?>
+
+                <form action="/user/changeDateBirth" method="POST" >
+                    <input type="text" name="new-birthdate">
+                    <button type="submit" name="changeDateBirth-submit">
+                        <img src="/img/svg/edit-solid.svg" alt="">
+                    </button>
+                </form> </div>
+            <div class="section-account__userinfo-data-item"> 
+                <?php foreach($data['userData'] as $key=>$info){ ?>
+                         <p class="name-description"><?php echo $info['userInfo'] ?> </p>
+                <?php } ?>           
+                <form action="/user/changeData" method="POST">
+                    <textarea name="new-userdata" id="" cols="30" rows="4"></textarea>
+                    <button type="submit" name="changeData-submit">
+                        <img src="/img/svg/edit-solid.svg" alt="">
+                    </button>
+                </form> 
+            </div>
+        
           </div>
         </div>
         <div class="section-account__userstatistics">
@@ -27,7 +55,7 @@
             </button>
           </div>
           <div class="section-account__userstatistics-tabcontent" id="domains">
-              <?php foreach($data as $key =>$domain){?>
+              <?php foreach($data['domains'] as $key => $domain){?>
                 <div class="tab-item">
                     <p><?php echo $domain['domainName'].'.'.$domain['domainZone'] ?></p>
                 </div>               

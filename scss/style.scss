@@ -718,12 +718,35 @@ body {
         }
 
         &-data {
-            p {
-
-                margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            &-item{
+                display: flex;
+                align-items: center;
+                padding: 10px 0;
+                border-bottom: 1px  solid #000;
+                justify-content: space-between;
+                flex-direction: column;
+                p {
+                
                 font-size: 15px;
                 color: #999999;
-            }
+            }   
+                form{
+                    button{
+                        background: none;
+                        border: none;
+                        justify-self: flex-end;
+                        img{
+                        height:20px;
+                        width: 20px;
+                        color: #999999;
+                        }
+                    }
+                }       
+
+        }
+
         }
     }
 

@@ -34,7 +34,9 @@ class ControllerUser extends Controller
     public function actionAccount()
     {
         if(isset($_SESSION['userId'])){
-            $data = $this->model->selectDomains($_SESSION['userId']);
+            $data=[];
+            $data['domains'] = $this->model->selectDomains($_SESSION['userId']);
+            $data['userData'] = $this->model->selectUserData($_SESSION['userId']);
             $this->view->generate('Account.php', 'AccountLayout.php', $data);
             
 
@@ -44,7 +46,6 @@ class ControllerUser extends Controller
         
         
     }
-
 
 
     public function actionRegisterUser(){
@@ -93,6 +94,7 @@ class ControllerUser extends Controller
         }
 
     }
+
 
     public function actionDomainRegAct(){
         if(isset($_POST['domainreg-submit'])){
@@ -145,18 +147,18 @@ class ControllerUser extends Controller
                         foreach ($domainNameExp as $domainNameLvl) {
                             //Пустой ли домен каждого уровня
                             if (empty($domainNameLvl)) {
-                                header("Location: ../domain-reg.php?error=domainnameempty");
+                                header("Location: ../domainreg?error=domainnameempty");
                                 exit();
                             } //Или же слишком длинный
                             elseif (strlen($domainNameLvl) > 63) {
-                                header("Location: ../domain-reg.php?error=domainnametoomuchsymbols");
+                                header("Location: ../domainreg?error=domainnametoomuchsymbols");
                                 exit();
                             }
                         }
         
                             if (in_array($domainNameExp[1], $allowed_zones)){
                                 if (preg_match("/^[\-]/", $domainNameExp[0]) or preg_match("/[\-]$/", $domainNameExp[0]) ){
-                                    header("Location: ../domain-reg.php?error=domainnamewrongsign");
+                                    header("Location: ../domainreg?error=domainnamewrongsign");
                                     exit();
                                 }else{
                                     
@@ -175,6 +177,67 @@ class ControllerUser extends Controller
         }
     }
 
+    public function actionChangeName(){
+        if(isset($_POST['changeName-submit'])){
+            $newName = $_POST['new-name'];
+            $userId = $_SESSION['userId'];
+            if(empty($newName)){
+                header("Location: ../user/account");
+                exit();
+            }
+            elseif( !preg_match("/^[a-zA-Z0-9]*$/", $newName)){
+                header("Location: ../user/account");
+                exit();
+            }
+            else{
+                $this->model->changeUserName($newName, $userId );
+            }
+        }else{
+            header("Location: ../user/account");
+            exit();
+        }
+    }
 
+    public function actionChangeDateBirth(){
+        if(isset($_POST['changeDateBirth-submit'])){
+            $newData = $_POST['new-birthdate'];
+            $userId = $_SESSION['userId'];
+            if(empty($newData)){
+                header("Location: ../user/account");
+                exit();
+            }
+            elseif( !preg_match("/(0[1-9]|[12][0-9]|3[01])[-\/.](0[1-9]|1[012])[-\/.](19|20)\d\d/", $newData)){
+                header("Location: ../user/account?error=dontmatch");
+                exit();
+            }
+            else{
+                $this->model->changeUserBrthDate($newData, $userId );
+            }
+        }else{
+            header("Location: ../user/account");
+            exit();
+        }
+    }
+
+    public function actionChangeData(){
+        if(isset($_POST['changeData-submit'])){
+            $newData = $_POST['new-userdata'];
+            $userId = $_SESSION['userId'];
+            if(empty($newData)){
+                header("Location: ../user/account");
+                exit();
+            }
+            elseif( !preg_match("/^[a-zA-Z0-9(\.,\-?!\s\\%\/$\#;)]*$/", $newData)){
+                header("Location: ../user/account?error=dontmatch");
+                exit();
+            }
+            else{
+                $this->model->changeUserInfo($newData, $userId );
+            }
+        }else{
+            header("Location: ../user/account");
+            exit();
+        }
+    }
 
 }

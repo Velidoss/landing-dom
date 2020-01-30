@@ -5,16 +5,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="/scss/style.css" />
+    <?php $cssVersion="3.4.2";?>
+    <link rel="stylesheet" href="/scss/style.css?v=<?php echo $cssVersion; ?>" />
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet" />
     <title>Strict</title>
 </head>
 
 <body>
-    <?php
-    // var_dump($_SERVER['REQUEST_URI']);
-
-    ?>
     <!-- header -->
     <section class="section-outer section-header">
         <div class="section-inner">

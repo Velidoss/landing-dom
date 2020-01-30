@@ -21,6 +21,16 @@ class ModelUser extends Dbh{
             $stmt = $this->db->prepare($sql);
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
             $stmt->execute([$username, $email, $hashedPassword]);
+
+            $sql = "SELECT idUsers FROM users WHERE uidUsers=? ";
+            $stmt = $this->db->prepare($sql);   
+            $stmt->bindParam(1, $username ); 
+            $stmt->execute();
+            $result = $stmt->fetch();
+            
+            $sql = "INSERT INTO userdata(userId, picStatus) VALUES (?,?)";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([$result['idUsers'], 1]);
         }
 
 
@@ -68,6 +78,41 @@ class ModelUser extends Dbh{
         }
     }
 
+    public function changeUserName($newName, $userId ){
+        $sql = "UPDATE userdata SET userName =? WHERE userid=?;";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$newName, $userId]);
+        header("Location: ../user/account/success");
+        echo 'Имя пользователя успешно изменено!';
+        exit();
+    }
+
+    public function changeUserBrthDate($newData, $userId ){
+        $sql = "UPDATE userdata SET userBrthDate =? WHERE userid=?;";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$newData, $userId]);
+        header("Location: ../user/account/success");
+        echo 'Дата рождения пользователя успешно изменена!';
+        exit();
+    }
+
+    public function changeUserInfo($newData, $userId ){
+        $sql = "UPDATE userdata SET userInfo =? WHERE userid=?;";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$newData, $userId]);
+        header("Location: ../user/account/success");
+        echo 'Информация пользователя успешно изменена!';
+        exit();
+    }
+
+    public function selectUserData($userId){
+        $sql = "SELECT * FROM userdata WHERE userId=?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(1, $userId);
+        $stmt->execute([$userId]);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
 
 
     public function selectDomains($userId){
@@ -78,4 +123,6 @@ class ModelUser extends Dbh{
         $result = $stmt->fetchAll();
         return $result;
     }
+
+
 }
