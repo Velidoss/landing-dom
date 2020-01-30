@@ -27,19 +27,11 @@
             </button>
           </div>
           <div class="section-account__userstatistics-tabcontent" id="domains">
-              <?php var_dump($data); ?>
-            <div class="tab-item">
-              <p>ololo.ing</p>
-            </div>
-            <div class="tab-item">
-              <p>beta.com</p>
-            </div>
-            <div class="tab-item">
-              <p>trololo.gov.ua</p>
-            </div>
-            <div class="tab-item">
-              <p>begov.biz</p>
-            </div>
+              <?php foreach($data as $key =>$domain){?>
+                <div class="tab-item">
+                    <p><?php echo $domain['domainName'].'.'.$domain['domainZone'] ?></p>
+                </div>               
+              <?php }?>
           </div>
           <div
             class="section-account__userstatistics-tabcontent"
