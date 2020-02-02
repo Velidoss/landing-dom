@@ -351,13 +351,14 @@ body {
     background: url('/img/banner-3.jpg') no-repeat 50% 50%;
     background-size: cover;
 }
-.section-domainreg{
+
+.section-domainreg {
     background: url('/img/banner-5.png') no-repeat 50% 50%;
     background-size: cover;
 }
 
 .section-register,
-.section-login{
+.section-login {
     position: relative;
 
     &::before {
@@ -371,6 +372,7 @@ body {
         background-color: rgba(45, 57, 80, .5);
     }
 }
+
 .section-domainreg {
     position: relative;
 
@@ -676,7 +678,7 @@ body {
     background: url('/img/banner-4.jpg') no-repeat 50% 50%;
     background-size: cover;
     position: relative;
-    
+
     &::before {
         content: '';
         position: absolute;
@@ -720,48 +722,54 @@ body {
         &-data {
             display: flex;
             flex-direction: column;
-            &-item{
+
+            &-item {
                 display: flex;
                 align-items: center;
                 padding: 10px 0;
-                border-bottom: 1px  solid #000;
+                border-bottom: 1px solid #000;
                 justify-content: space-between;
                 flex-direction: row;
+
                 .data-item-info {
                     position: relative;
 
-                    p{                
+                    p {
                         font-size: 15px;
                         color: #999999;
-                        }
+                    }
                 }
-                button{
+
+                button {
                     background: none;
                     border: none;
                     justify-self: flex-end;
-                    img{
-                    height:20px;
-                    width: 20px;
-                    color: #999999;
+
+                    img {
+                        height: 20px;
+                        width: 20px;
+                        color: #999999;
                     }
                 }
-                form{
+
+                form {
                     position: absolute;
                     display: none;
-                    
-                    button{
+
+                    button {
                         background: none;
                         border: none;
                         justify-self: flex-end;
-                        img{
-                        height:20px;
-                        width: 20px;
-                        color: #999999;
+
+                        img {
+                            height: 20px;
+                            width: 20px;
+                            color: #999999;
                         }
                     }
-                }       
+                }
             }
-        
+
 
         }
     }

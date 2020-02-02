@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <?php $cssVersion="3.4.2";?>
+    <?php $cssVersion = "3.4.2"; ?>
     <link rel="stylesheet" href="/scss/style.css?v=<?php echo $cssVersion; ?>" />
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet" />
     <title>Strict</title>
@@ -30,7 +30,7 @@
                                 </button>
                             </form>
                         </li>
-                    <?php }else{; ?>
+                    <?php } else {; ?>
                         <li><a href="/">Home</a></li>
                         <li><a href="/user/register">Signup</a></li>
                         <li><a href="/user/login">Login</a></li>
@@ -43,7 +43,7 @@
                 </button>
             </div>
         </div>
-    </section>  
+    </section>
     <!-- header -->
     <!-- toggle-menu -->
     <div class="toggle">
@@ -59,7 +59,7 @@
                         </button>
                     </form>
                 </li>
-            <?php }else{; ?>
+            <?php } else {; ?>
                 <li><a href="/">Home</a></li>
                 <li><a href="/user/register">Signup</a></li>
                 <li><a href="/user/login">Login</a></li>
@@ -68,7 +68,7 @@
     </div>
     <!-- toggle-menu -->
     <?php
-    include 'app/views/' . $contentView;?>
+    include 'app/views/' . $contentView; ?>
 
     <!-- footer -->
     <section class="section-outer section-footer">
@@ -85,5 +85,6 @@
     <!-- footer -->
 </body>
 <script src="/js/toggle.js"></script>
+<script src="/js/editinfo.js"></script>
 
 </html>

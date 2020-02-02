@@ -1263,7 +1263,7 @@ body {
       -ms-flex-align: center;
           align-items: center;
   padding: 10px 0;
-  border-bottom: 1px  solid #000;
+  border-bottom: 1px solid #000;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
