@@ -344,6 +344,16 @@ body {
                 }
             }
         }
+
+        &-redirect {
+            text-align: center;
+            padding-top: 10px;
+
+
+            a {
+                color: #0b1114;
+            }
+        }
     }
 
     &__btn {

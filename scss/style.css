@@ -777,6 +777,33 @@ body {
   }
 }
 
+.section-banner__register-redirect, .section-banner__login-redirect, .section-banner__regaction-redirect,
+.section-register__register-redirect,
+.section-register__login-redirect,
+.section-register__regaction-redirect,
+.section-login__register-redirect,
+.section-login__login-redirect,
+.section-login__regaction-redirect,
+.section-domainreg__register-redirect,
+.section-domainreg__login-redirect,
+.section-domainreg__regaction-redirect {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.section-banner__register-redirect a, .section-banner__login-redirect a, .section-banner__regaction-redirect a,
+.section-register__register-redirect a,
+.section-register__login-redirect a,
+.section-register__regaction-redirect a,
+.section-login__register-redirect a,
+.section-login__login-redirect a,
+.section-login__regaction-redirect a,
+.section-domainreg__register-redirect a,
+.section-domainreg__login-redirect a,
+.section-domainreg__regaction-redirect a {
+  color: #0b1114;
+}
+
 .section-banner__btn,
 .section-register__btn,
 .section-login__btn,
