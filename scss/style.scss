@@ -81,15 +81,28 @@ body {
         padding-bottom: 34px;
         display: flex;
         align-items: center;
-        font-size: 30px;
-        color: #2d3950;
-        line-height: 34px;
-        text-transform: uppercase;
+
         flex-grow: 2;
 
-        img {
-            margin-right: 20px;
+        a {
+            text-decoration: none;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            img {
+                margin-right: 10px;
+            }
+
+            h1 {
+                font-size: 30px;
+                color: #2d3950;
+                line-height: 34px;
+                text-transform: uppercase;
+
+            }
         }
+
     }
 
     &__toggler {
@@ -107,12 +120,19 @@ body {
             list-style: none;
 
             li {
-
                 a {
                     text-transform: uppercase;
                     color: #2d3950;
                     text-decoration: none;
                     font-size: 20px;
+
+                    &::after {
+                        content: '|';
+                        color: #2d3950;
+                        font-size: 20px;
+                        padding-left: 20px;
+                    }
+
                 }
 
                 form {
@@ -133,7 +153,7 @@ body {
 
 
 
-    @media (max-width:$screen-xs-max) {
+    @media (max-width:$screen-md-max) {
         &__top-nav {
             display: none;
         }
@@ -196,8 +216,8 @@ body {
                 button {
                     background: none;
                     border: none;
-                    text-transform: uppercase;
-                    color: #2d3950;
+                    color: #fff;
+                    text-decoration: none;
                     font-size: 20px;
                     cursor: pointer;
                 }
@@ -205,7 +225,7 @@ body {
         }
     }
 
-    @media (min-width:$screen-sm) {
+    @media (min-width:$screen-md-max) {
         display: none;
     }
 }
@@ -833,3 +853,69 @@ body {
 }
 
 // === account info ===
+
+
+// === posts ===
+
+.section-postlist {
+    .section-posts-inner {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 960px;
+        margin: 0 auto;
+
+    }
+
+    &__post {
+        display: flex;
+        flex-direction: column;
+        max-width: 600px;
+        margin-top: 30px;
+        padding-bottom: 30px;
+        border-bottom: 1px solid #999999;
+
+        &-info {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+
+
+            &-pic {
+                width: 50px;
+                height: 50px;
+            }
+
+            &-author {
+                padding-left: 10px;
+                font-size: 15px;
+                color: #2d3950;
+            }
+
+            &-dateposted {
+                padding-left: 10px;
+                font-size: 15px;
+                color: #999999;
+            }
+        }
+
+        &-content {
+            padding-top: 10px;
+
+            &-title {
+                padding: 10px 20px;
+                font-size: 16px;
+                color: #2d3950;
+
+            }
+
+            &-text {
+                font-size: 14px;
+                color: #999999;
+            }
+        }
+
+    }
+}
+
+// === posts ===
