@@ -1,12 +1,12 @@
 let openUserStat = function() {
-  let tabContent = document.getElementsByClassName("tab-item");
+  // выбираем поля с контентом
+  let tabContent = document.getElementsByClassName("section-account__userstatistics-tabcontent");
 
   for (i = 0; i < tabContent.length; i++) {
     tabContent[i].style.display = "none";
   }
-  let tabLinks = document.getElementsByClassName(
-    "section-account__userstatistics-tabs-tablink"
-  );
+
+  let tabLinks = document.getElementsByClassName("section-account__userstatistics-tabs-tablink");
   for (i = 0; i < tabLinks.length; i++) {
     tabLinks[i].className = tabLinks[i].className.replace("active", "");
   }

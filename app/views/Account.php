@@ -59,7 +59,7 @@
     </div>
     <div class="section-account__userstatistics">
       <div class="section-account__userstatistics-tabs">
-        <button class="section-account__userstatistics-tabs-tablink">
+        <button class="section-account__userstatistics-tabs-tablink" id="defaultOpen">
           My domains
         </button>
         <button class="section-account__userstatistics-tabs-tablink">
