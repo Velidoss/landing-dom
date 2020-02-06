@@ -19,21 +19,26 @@
     <section class="section-outer section-header">
         <div class="section-inner">
             <div class="section-header__top-logo">
-                <img src="/img/Blue Top.png" alt="img-logo" />Strict </div>
+                <a href="/">
+                    <img src="/img/Blue Top.png" alt="img-logo" />
+                    <h1>Strict</h1>
+                </a>
+            </div>
             <nav class="section-header__top-nav">
                 <ul class="section-header__top-nav-menu">
                     <?php if (isset($_SESSION['userId'])) { ?>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/user/domainreg">Register domain name</a></li>
-                    <li><a href="/user/account">Account</a></li>
-                    <li>
-                        <form action="/user/logout" method="POST">
-                            <button class="logout-btn" name="logout-submit" type="submit">
-                                Logout
-                            </button>
-                        </form>
-                    </li>
-                    <?php }else{; ?>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/user/domainreg">Register domain name</a></li>
+                        <li><a href="/user/account">Account</a></li>
+                        <li><a href="/posts/postlist">Posts</a></li>
+                        <li>
+                            <form action="/user/logout" method="POST">
+                                <button class="logout-btn" name="logout-submit" type="submit">
+                                    Logout
+                                </button>
+                            </form>
+                        </li>
+                    <?php } else {; ?>
                         <li><a href="/">Home</a></li>
                         <li><a href="/user/register">Signup</a></li>
                         <li><a href="/user/login">Login</a></li>
@@ -56,6 +61,7 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/user/about">Register domain name</a></li>
                 <li><a href="/user/account">Account</a></li>
+                <li><a href="/posts/postlist">Posts</a></li>
                 <li>
                     <form action="/user/logout" method="POST">
                         <button class="logout-btn" name="logout-submit" type="submit">
@@ -63,7 +69,7 @@
                         </button>
                     </form>
                 </li>
-            <?php }else{; ?>
+            <?php } else {; ?>
                 <li><a href="/">Home</a></li>
                 <li><a href="/user/domainreg">Signup</a></li>
                 <li><a href="/user/login">Login</a></li>

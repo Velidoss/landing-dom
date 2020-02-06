@@ -28,4 +28,9 @@ return [
 		'controller' => 'user',
 		'action' => 'domainreg',
 	],
+
+	'posts/postlist' => [
+		'controller' => 'posts',
+		'action' => 'postlist',
+	],
 ];

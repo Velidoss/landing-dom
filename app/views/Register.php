@@ -10,7 +10,9 @@
                     <input name="pwd-repeat" type="password" placeholder="Repeat password">
                     <button name="register-submit" class="btn-main" type="submit">Register</button>
                 </form>
-
+                <div class="section-banner__register-redirect">
+                    <a href="/user/login">Already have an account? Log in!</a>
+                </div>
             </div>
         </div>
     </section>

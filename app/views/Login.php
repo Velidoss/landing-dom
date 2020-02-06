@@ -8,6 +8,9 @@
                     <input name="pwd" type="password" placeholder="Enter password">
                     <button name="login-submit" class="btn-main" type="submit">Log in</button>
                 </form>
+                <div class="section-banner__login-redirect">
+                    <a href="/user/register">Dont have an account? Sign in!</a>
+                </div>
             </div>
         </div>
     </section>

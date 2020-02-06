@@ -402,17 +402,34 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  font-size: 30px;
-  color: #2d3950;
-  line-height: 34px;
-  text-transform: uppercase;
   -webkit-box-flex: 2;
       -ms-flex-positive: 2;
           flex-grow: 2;
 }
 
-.section-header__top-logo img {
-  margin-right: 20px;
+.section-header__top-logo a {
+  text-decoration: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.section-header__top-logo a img {
+  margin-right: 10px;
+}
+
+.section-header__top-logo a h1 {
+  font-size: 30px;
+  color: #2d3950;
+  line-height: 34px;
+  text-transform: uppercase;
 }
 
 .section-header__toggler {
@@ -449,6 +466,13 @@ body {
   font-size: 20px;
 }
 
+.section-header__top-nav-menu li a::after {
+  content: '|';
+  color: #2d3950;
+  font-size: 20px;
+  padding-left: 20px;
+}
+
 .section-header__top-nav-menu li form button {
   background: none;
   border: none;
@@ -458,7 +482,7 @@ body {
   cursor: pointer;
 }
 
-@media (max-width: 575px) {
+@media (max-width: 991px) {
   .section-header__top-nav {
     display: none;
   }
@@ -527,13 +551,13 @@ body {
 .toggle-menu li form button {
   background: none;
   border: none;
-  text-transform: uppercase;
-  color: #2d3950;
+  color: #fff;
+  text-decoration: none;
   font-size: 20px;
   cursor: pointer;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 991px) {
   .toggle {
     display: none;
   }
@@ -751,6 +775,33 @@ body {
   .section-domainreg__regaction-form input {
     line-height: 40px;
   }
+}
+
+.section-banner__register-redirect, .section-banner__login-redirect, .section-banner__regaction-redirect,
+.section-register__register-redirect,
+.section-register__login-redirect,
+.section-register__regaction-redirect,
+.section-login__register-redirect,
+.section-login__login-redirect,
+.section-login__regaction-redirect,
+.section-domainreg__register-redirect,
+.section-domainreg__login-redirect,
+.section-domainreg__regaction-redirect {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.section-banner__register-redirect a, .section-banner__login-redirect a, .section-banner__regaction-redirect a,
+.section-register__register-redirect a,
+.section-register__login-redirect a,
+.section-register__regaction-redirect a,
+.section-login__register-redirect a,
+.section-login__login-redirect a,
+.section-login__regaction-redirect a,
+.section-domainreg__register-redirect a,
+.section-domainreg__login-redirect a,
+.section-domainreg__regaction-redirect a {
+  color: #0b1114;
 }
 
 .section-banner__btn,
@@ -1384,5 +1435,79 @@ body {
 
 .section-account__userstatistics #comments {
   display: none;
+}
+
+.section-postlist .section-posts-inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 960px;
+  margin: 0 auto;
+}
+
+.section-postlist__post {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  max-width: 600px;
+  margin-top: 30px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #999999;
+}
+
+.section-postlist__post-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.section-postlist__post-info-pic {
+  width: 50px;
+  height: 50px;
+}
+
+.section-postlist__post-info-author {
+  padding-left: 10px;
+  font-size: 15px;
+  color: #2d3950;
+}
+
+.section-postlist__post-info-dateposted {
+  padding-left: 10px;
+  font-size: 15px;
+  color: #999999;
+}
+
+.section-postlist__post-content {
+  padding-top: 10px;
+}
+
+.section-postlist__post-content-title {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #2d3950;
+}
+
+.section-postlist__post-content-text {
+  font-size: 14px;
+  color: #999999;
 }
 /*# sourceMappingURL=style.css.map */

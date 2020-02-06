@@ -12,12 +12,12 @@
               <p class="name-surname"><?php echo $info['userName'] ?> </p>
             </div>
           <?php } ?>
-          <button onclick="changeData()" class="open-form-btn" type="submit" name="open-form">
+          <button class="open-form-btn" type="submit" name="open-form">
             <img src="/img/svg/edit-solid.svg" alt="">
           </button>
           <form class="change-data-form" action="/user/changeName" method="POST">
             <input type="text" name="new-name">
-            <button onclick="changeData()" class="change-data-btn" type="submit" name="changeName-submit">
+            <button class="change-data-btn" type="submit" name="changeName-submit">
               <img src="/img/svg/edit-solid.svg" alt="">
             </button>
           </form>
@@ -28,12 +28,12 @@
               <p class="name-age"><?php echo $info['userBrthDate'] ?> </p>
             </div>
           <?php } ?>
-          <button onclick="changeData()" class="open-form-btn" type="submit" name="open-form">
+          <button class="open-form-btn" type="submit" name="open-form">
             <img src="/img/svg/edit-solid.svg" alt="">
           </button>
           <form class="change-data-form" action="/user/changeDateBirth" method="POST">
             <input type="text" name="new-birthdate">
-            <button onclick="changeData()" class="change-data-btn" type="submit" name="changeDateBirth-submit">
+            <button class="change-data-btn" type="submit" name="changeDateBirth-submit">
               <img src="/img/svg/edit-solid.svg" alt="">
             </button>
           </form>
@@ -44,12 +44,12 @@
               <p class="name-description"><?php echo $info['userInfo'] ?> </p>
             </div>
           <?php } ?>
-          <button onclick="changeData()" class="open-form-btn" type="submit" name="open-form">
+          <button class="open-form-btn" type="submit" name="open-form">
             <img src="/img/svg/edit-solid.svg" alt="">
           </button>
           <form class="change-data-form" action="/user/changeData" method="POST">
             <textarea name="new-userdata" id="" cols="30" rows="4"></textarea>
-            <button onclick="changeData()" class="change-data-btn" type="submit" name="changeData-submit">
+            <button class="change-data-btn" type="submit" name="changeData-submit">
               <img src="/img/svg/edit-solid.svg" alt="">
             </button>
           </form>
