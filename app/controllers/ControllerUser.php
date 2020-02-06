@@ -37,6 +37,7 @@ class ControllerUser extends Controller
             $data=[];
             $data['domains'] = $this->model->selectDomains($_SESSION['userId']);
             $data['userData'] = $this->model->selectUserData($_SESSION['userId']);
+            $data['userPosts'] = $this->model->selectUserPosts($_SESSION['userUid']);
             $this->view->generate('Account.php', 'AccountLayout.php', $data);
             
 

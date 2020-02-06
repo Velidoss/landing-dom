@@ -1,5 +1,5 @@
 <!-- postlist -->
-<section class="section-inner section-postlist">
+<section class="section-outer section-postlist">
     <div class="section-posts-inner">
         <?php foreach ($data['posts'] as $num => $post) { ?>
             <div class="section-postlist__post">

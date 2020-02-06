@@ -59,24 +59,38 @@
     </div>
     <div class="section-account__userstatistics">
       <div class="section-account__userstatistics-tabs">
-        <button class="section-account__userstatistics-tabs-tablink" id="defaultOpen">
+        <button onclick="openUserStat('domains')" class="section-account__userstatistics-tabs-tablink" id="defaultOpen">
           My domains
         </button>
-        <button class="section-account__userstatistics-tabs-tablink">
+        <button onclick="openUserStat('posts')" class="section-account__userstatistics-tabs-tablink">
           My posts
         </button>
-        <button class="section-account__userstatistics-tabs-tablink">
+        <button onclick="openUserStat('comments')" class="section-account__userstatistics-tabs-tablink">
           My comments
         </button>
       </div>
       <div class="section-account__userstatistics-tabcontent" id="domains">
+        <div class="section-account__userstatistics-tabcontent-domains">
         <?php foreach ($data['domains'] as $key => $domain) { ?>
-          <div class="tab-item">
-            <p><?php echo $domain['domainName'] . '.' . $domain['domainZone'] ?></p>
-          </div>
+            <div class="tab-item">
+              <p><?php echo $domain['domainName'] . '.' . $domain['domainZone'] ?></p>
+            </div>
         <?php } ?>
+        </div>
       </div>
-      <div class="section-account__userstatistics-tabcontent" id="posts"></div>
+      <div class="section-account__userstatistics-tabcontent" id="posts">
+        <div class="section-account__userstatistics-tabcontent-posts">
+        <?php foreach ($data['userPosts'] as $key => $post) { ?>
+          
+            <div class="tab-item">
+              <p><?php echo $post['postTitle'] ?></p>
+              <p><?php echo 'Category:'.$post['postCategory'].' .Posted on: '.$post['postDateTime'] ?></p>
+              <p><?php echo $post['postContent'] ?></p>
+            </div>
+          
+        <?php } ?>
+        </div>
+      </div>
       <div class="section-account__userstatistics-tabcontent" id="comments"></div>
     </div>
   </div>

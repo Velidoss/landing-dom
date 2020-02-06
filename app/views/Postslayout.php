@@ -72,6 +72,19 @@
             <?php } ?>
         </ul>
     </div>
+    <!-- posts-menu -->
+    <section class="section-outer section-postmenu">
+        <div class="section-inner">
+            <div class="section-postmenu__nav">
+                <ul class="section-postmenu__nav-functions">
+                    <li class="section-postmenu__nav-functions-item"><a href="/posts/makepost">Make a post</a></li>
+                    <li class="section-postmenu__nav-functions-item"><a href="/posts/postlist">Postlist</a></li>
+                    <li class="section-postmenu__nav-functions-item"><a href="/posts/searchpost">Search a post</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- posts-menu -->
     <!-- toggle-menu -->
     <?php
     include 'app/views/' . $contentView; ?>

@@ -124,5 +124,12 @@ class ModelUser extends Dbh{
         return $result;
     }
 
-
+    public function selectUserPosts($userUid){
+        $sql = "SELECT postTitle, postCategory, postContent, postDateTime FROM posts WHERE postAuthor=?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(1, $userUid);
+        $stmt->execute([$userUid]);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
 }

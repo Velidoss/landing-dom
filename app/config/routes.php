@@ -33,4 +33,12 @@ return [
 		'controller' => 'posts',
 		'action' => 'postlist',
 	],
+	'posts/makepost' => [
+		'controller' => 'posts',
+		'action' => 'makepost',
+	],
+	'posts/searchpost' => [
+		'controller' => 'posts',
+		'action' => 'searchpost',
+	],
 ];
