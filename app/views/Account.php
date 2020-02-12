@@ -80,15 +80,15 @@
       </div>
       <div class="section-account__userstatistics-tabcontent" id="posts">
         <div class="section-account__userstatistics-tabcontent-posts">
-        <?php foreach ($data['userPosts'] as $key => $post) { ?>
+        <?php foreach ($data['userPosts'] as $key => $post): ?>
           
             <div class="tab-item">
-              <p><?php echo $post['postTitle'] ?></p>
-              <p><?php echo 'Category:'.$post['postCategory'].' .Posted on: '.$post['postDateTime'] ?></p>
-              <p><?php echo $post['postContent'] ?></p>
+              <p class="post-title"><?php echo $post['postTitle'] ?></p>
+              <p class="post-category"><?php echo 'Category:'.$post['postCategory'].' .Posted on: '.$post['postDateTime'] ?></p>
+              <p class="post-content"><?php echo $post['postContent'] ?></p>
             </div>
           
-        <?php } ?>
+        <?php endforeach ?>
         </div>
       </div>
       <div class="section-account__userstatistics-tabcontent" id="comments"></div>

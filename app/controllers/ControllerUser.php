@@ -2,6 +2,8 @@
 
 require_once 'app/models/ModelUser.php';
 
+use app\core\View;
+
 class ControllerUser extends Controller
 {
 
@@ -73,7 +75,7 @@ class ControllerUser extends Controller
             }
             
         }
-        echo 'Вы успешно зарегистрировались';
+        echo 'Вы зарегистрированы';
 
     }
     public function actionLoginUser(){
@@ -238,6 +240,41 @@ class ControllerUser extends Controller
         }else{
             header("Location: ../user/account");
             exit();
+        }
+    }
+    public function actionForgotpwd(){
+        $this->view->generate('forgotpwd.php', 'AccountLayout.php');
+        if(isset($_POST['renew-submit'])){
+            if(!empty($_POST['renew-email'])){
+                $this->model->requestPwdChange($_POST);
+                echo 'The password reset letter was sent on your email!';
+            }else{            
+                echo 'Type your email!';
+                exit();
+            }
+            
+        }
+    }
+
+    public function actionChangepwd(){
+        $this->view->generate('changepwd.php', 'AccountLayout.php');
+        if(isset($_POST['changepwd-submit'])){
+            if(empty($_POST['new-pwd']) || empty($_POST['repeat-new-pwd'])){
+                echo 'fill all the fields!';
+                exit();
+            }else{            
+                if($_POST['new-pwd'] != $_POST['repeat-new-pwd']){
+                    echo 'Your passwords dont match!';
+                    exit();
+                }else{
+                    $this->model->pwdChange($_POST);
+                    header('Location: /user/login');
+                    exit();
+                }
+            }
+            
+        }else{
+            header('Location: /');
         }
     }
 

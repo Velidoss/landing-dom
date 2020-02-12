@@ -750,6 +750,20 @@ body {
   font-size: 20px;
 }
 
+.section-banner__register-form a, .section-banner__login-form a, .section-banner__regaction-form a,
+.section-register__register-form a,
+.section-register__login-form a,
+.section-register__regaction-form a,
+.section-login__register-form a,
+.section-login__login-form a,
+.section-login__regaction-form a,
+.section-domainreg__register-form a,
+.section-domainreg__login-form a,
+.section-domainreg__regaction-form a {
+  color: #bebebe;
+  margin-bottom: 10px;
+}
+
 @media (max-width: 767px) {
   .section-banner__register-form .btn-main, .section-banner__login-form .btn-main, .section-banner__regaction-form .btn-main,
   .section-register__register-form .btn-main,
@@ -801,7 +815,7 @@ body {
 .section-domainreg__register-redirect a,
 .section-domainreg__login-redirect a,
 .section-domainreg__regaction-redirect a {
-  color: #0b1114;
+  color: #bebebe;
 }
 
 .section-banner__btn,
@@ -1264,7 +1278,8 @@ body {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  height: calc(100vh - 399px);
+  min-height: calc(100vh - 399px);
+  height: 100%;
   position: relative;
 }
 
@@ -1276,14 +1291,11 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: 300px;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
   text-align: center;
-  -webkit-box-flex: 2;
-      -ms-flex-positive: 2;
-          flex-grow: 2;
+  width: 30%;
   margin-right: 20px;
   position: relative;
 }
@@ -1371,9 +1383,7 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-flex: 4;
-      -ms-flex-positive: 4;
-          flex-grow: 4;
+  width: 70%;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -1400,12 +1410,19 @@ body {
 .section-account__userstatistics-tabcontent {
   border-top: 1px solid #999999;
   display: none;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+}
+
+.section-account__userstatistics-tabcontent:first-child {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .section-account__userstatistics-tabcontent-domains {
@@ -1414,10 +1431,10 @@ body {
   display: flex;
   -ms-flex-pack: distribute;
       justify-content: space-around;
-  -webkit-box-orient: vertical;
+  -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+      -ms-flex-direction: row;
+          flex-direction: row;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   -ms-flex-flow: row wrap;
@@ -1444,8 +1461,6 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -1455,20 +1470,31 @@ body {
 
 .section-account__userstatistics-tabcontent-posts .tab-item {
   padding-top: 10px;
-  text-align: center;
+  margin-left: 20px;
 }
 
 .section-account__userstatistics-tabcontent-posts .tab-item .active {
   background-color: rgba(45, 57, 80, 0.3);
 }
 
-.section-account__userstatistics-tabcontent-posts .tab-item p {
-  font-size: 15px;
-  color: #999999;
+.section-account__userstatistics-tabcontent-posts .tab-item p:last-child {
+  border-top: 1px solid #999999;
+  border-bottom: 1px solid #999999;
 }
 
-.section-account__userstatistics-tabcontent-posts .tab-item p:last-child {
-  border-bottom: 1px solid #999999;
+.section-account__userstatistics-tabcontent-posts .tab-item .post-title {
+  font-size: 17px;
+  color: #e7e7e7;
+}
+
+.section-account__userstatistics-tabcontent-posts .tab-item .post-category {
+  font-size: 15px;
+  color: #e7e5e5;
+}
+
+.section-account__userstatistics-tabcontent-posts .tab-item .post-content {
+  font-size: 15px;
+  color: #999999;
 }
 
 .section-postlist .section-posts-inner {
@@ -1624,6 +1650,7 @@ body {
       -ms-flex-align: center;
           align-items: center;
   height: calc( 100vh - 325px);
+  max-width: 600px;
 }
 
 .section-makepost__title {
@@ -1643,10 +1670,12 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  width: 100%;
 }
 
 .section-makepost__form-input {
   margin-bottom: 22px;
+  width: 100%;
   font-size: 15;
   color: #999999;
   line-height: 60px;
@@ -1658,6 +1687,7 @@ body {
 
 .section-makepost__form-textarea {
   margin-bottom: 22px;
+  width: 100%;
   font-size: 15;
   color: #999999;
   line-height: 20px;
@@ -1668,6 +1698,65 @@ body {
 }
 
 .section-makepost__form .btn-main {
+  padding: 18px 50px;
+  font-size: 18px;
+}
+
+.section-searchpost {
+  padding-top: 20px;
+  background: #f3f3f3;
+}
+
+.section-searchpost .section-inner {
+  z-index: 10;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: calc( 100vh - 325px);
+  max-width: 700px;
+}
+
+.section-searchpost__title {
+  font-size: 40px;
+  color: #2d3950;
+  margin-bottom: 20px;
+}
+
+.section-searchpost__form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+
+.section-searchpost__form-input {
+  margin-bottom: 22px;
+  width: 60%;
+  font-size: 15;
+  color: #999999;
+  line-height: 60px;
+  padding: 0 20px;
+  background: none;
+  border: 1px solid #999999;
+  border-radius: 4px;
+}
+
+.section-searchpost__form .btn-main {
   padding: 18px 50px;
   font-size: 18px;
 }

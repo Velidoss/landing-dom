@@ -11,4 +11,3 @@ let openUserStat = function(pageName) {
   
 };
 
-document.getElementById("dafaulOpen").click();

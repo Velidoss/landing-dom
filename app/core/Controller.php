@@ -1,6 +1,6 @@
 <?php
 
-
+use app\core\View;
 
 class Controller
 {
@@ -11,9 +11,6 @@ class Controller
     {
         
         $this->view = new View();
-        
     }
-    public function actionIndex()
-    {
-    }
+
 }

@@ -1,7 +1,7 @@
 <?php
 
 require_once 'app/models/ModelPosts.php';
-
+use app\core\View;
 class Controllerposts extends Controller
 {
 
@@ -29,6 +29,14 @@ class Controllerposts extends Controller
         header("Location: /");
         }
     }
+    public function actionSearchpost(){
+        if (isset($_SESSION['userId'])) {
+            $this->view->generate('Searchpost.php', 'Postslayout.php');
+        }else {
+            header("Location: /");
+            }
+    }
+
     public function actionMakepostact(){
         if (isset ($_POST['post-create'])){
             if (empty($_POST['posttile']) || empty($_POST['postcategory']) || empty($_POST['posttext']) ){
@@ -43,6 +51,23 @@ class Controllerposts extends Controller
                 $this->model->createPost($postTitle,  $postText, $postDateTime, $postCategory, $postAuthor);
             }
 
+        }
+    }
+    public function actionSearchpostact(){
+        if(isset($_POST['search-post'])){
+            if(empty($_POST['searchpost-query'])){
+                header('Location:/posts/makepost?emptyfields');
+                exit();
+            }else{
+                $query = htmlspecialchars($_POST['searchpost-query']);
+                $postsFound = $this->model->findPost($query);
+                if ($postsFound){
+                    var_dump($postsFound);
+
+                
+                }
+                    
+            }
         }
     }
 }

@@ -4,6 +4,7 @@ return [
 		'controller' => 'main',
 		'action' => 'index',
 	],
+
 	'' => [
 		'controller' => 'main',
 		'action' => 'index',
@@ -27,6 +28,10 @@ return [
 	'user/domainreg' => [
 		'controller' => 'user',
 		'action' => 'domainreg',
+	],
+	'user/forgotpwd' => [
+		'controller' => 'user',
+		'action' => 'forgotpwd',
 	],
 
 	'posts/postlist' => [

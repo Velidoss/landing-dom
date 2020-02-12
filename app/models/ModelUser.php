@@ -44,12 +44,12 @@ class ModelUser extends Dbh{
         if($user){
 
             if(password_verify($password, $user['pwdUsers'])){
-                session_start();
                 $_SESSION['userId'] = $user['idUsers'];
                 $_SESSION['userUid'] = $user['uidUsers'];
                 $_SESSION['count'] = 0;
+                session_start();
                 header('Location: /user/account');
-                echo "Вы авторизованы в системе!";
+                
                 exit();
             }else{
                 header("Location:/");
@@ -57,6 +57,95 @@ class ModelUser extends Dbh{
             }
         }
     }
+
+    public function requestPwdChange($post){
+        $selector = bin2hex(random_bytes(8));
+        $token = random_bytes(32);
+    
+        $url = "https://".$_SERVER['HTTP_HOST']."/changepwd.php?selector=".$selector."&validator=".bin2hex($token);
+        $expires = date("U") + 1800;
+
+        $userEmail = $post["renew-email"];
+
+        $sql = "DELETE FROM pwdreset WHERE pwdResetEmail=?;";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(1, $userEmail);
+        $stmt->execute();
+
+        $sql = "INSERT INTO pwdreset (pwdResetEmail, pwdResetSelector, pwdResetToken, pwdResetExpires) VALUES (?,?,?,?);";
+        $stmt = $this->db->prepare($sql);
+        $hashedToken = password_hash($token, PASSWORD_DEFAULT);
+        $stmt->execute([$userEmail, $selector, $hashedToken, $expires]);
+
+        $to = $userEmail;
+
+
+        $subject = 'Reset yur password for Velidoss';
+
+        $message = '<p>We received the password reset request . The link to reset your password attached below. Ignore this message if you didnt make this request</p>';
+        $message .= '<p>Here is your password reset link: </br>';
+
+        $message .= '<a href="' .$url.'">'.$url.'</a></p>';
+
+        $headers = "From: Velidoss <info@velidoss.fun>\r\n";
+        $headers .= "Reply-To:info@velidoss.fun\r\n";
+        $headers .= "Content-type: text/html\r\n";
+        
+        mail($to, $subject, $message, $headers);
+
+         
+    }
+
+    public function pwdChange($post){
+        $selector = $post["selector"];
+        $validator = $post["validator"];
+        $password = $post["new-pwd"];
+        $passwordRepeat = $post["repeat-new-pwd"];
+        $currentDate = date("U");
+
+        $sql = "SELECT * FROM pwdReset WHERE pwdResetSelector=? AND pwdResetExpires >= ?;"; 
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(1, $selector);
+        $stmt->bindParam(2, $currentDate );
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        if(!count($result)>0){
+            echo 'There is an error!';
+            exit();
+        }else{
+            $tokenBin = hex2bin($validator);
+            $tokenCheck = password_verify($tokenBin, $result["pwdResetToken"]);
+            if ($tokenCheck === false) {
+        		echo "You need to re-submit your reset request.";
+        		exit();
+        	}elseif($tokenCheck === true){
+                $tokenEmail =$result['pwdResetEmail'];
+                $sql ="SELECT * FROM users WHERE emailUsers=?;";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(1, $tokenEmail );
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                if(!count($result)>0){
+                    echo 'There is an error!';
+                    exit();
+                }else{
+                    $sql = "UPDATE users SET pwdUsers=? WHERE emailUsers=?";
+                    $stmt = $this->db->prepare($sql);
+                    $newPwdHash = password_hash($password, PASSWORD_DEFAULT);
+                    $stmt->bindParam(1, $newPwdHash );
+                    $stmt->bindParam(2, $tokenEmail );
+                    $stmt->execute();
+
+                    $sql = "DELETE FROM pwdReset WHERE pwdResetEmail=?;";
+                    $stmt = $this->db->prepare($sql);
+                    $stmt->bindParam(1, $tokenEmail );
+                    $stmt->execute();
+                }
+            }
+        }
+        
+    }
+
     public function domainRegister($domainRegistrarId, $domainTimeReg, $domainName, $domainZone){
         $sql = "SELECT domainName FROM domains WHERE domainName=?;";
         $stmt = $this->db->prepare($sql);

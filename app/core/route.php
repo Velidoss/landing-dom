@@ -1,5 +1,7 @@
 <?php
 
+
+use app\core\View;
 class Route
 {
 
@@ -35,14 +37,14 @@ class Route
         if (file_exists($controllerPath)) {
             include_once 'app/controllers/' . ucfirst($controllerFile);
         } else {
-            Route::errorPage404();
+            View::errorCode(404);
         }
         $controller = new $controllerName;
         $action = $actionName;
         if (method_exists($controller, $action)) {
             $controller->$action();
         } else {
-            Route::errorPage404();
+            View::errorCode(404);
         }
     }
     function errorPage404()

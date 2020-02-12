@@ -20,6 +20,19 @@ class ModelPosts extends Dbh
         exit();
         
     }
+    public function findPost($query){
+        $sql = "SELECT postAuthor, postDateTime, postTitle, postContent FROM posts WHERE postAuthor like '%$query%' or postTitle like '%$query%' or postContent like '%$query%';";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$query]);
+        $result = $stmt->fetchAll();
+        var_dump($result);
+        if($result){    
+            return $result;
+            header("Location: /posts/searchpost");
+            exit();
+        }
+        
+    }
     
     
 }
