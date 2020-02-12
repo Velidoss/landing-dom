@@ -34,6 +34,11 @@ return [
 		'action' => 'forgotpwd',
 	],
 
+	'user/changepwd' => [
+		'controller' => 'user',
+		'action' => 'changepwd',
+	],
+
 	'posts/postlist' => [
 		'controller' => 'posts',
 		'action' => 'postlist',

@@ -31,7 +31,24 @@ class Controllerposts extends Controller
     }
     public function actionSearchpost(){
         if (isset($_SESSION['userId'])) {
-            $this->view->generate('Searchpost.php', 'Postslayout.php');
+            $data = [];
+            
+            if(isset($_POST['post-searchpost'])){
+                if(empty($_POST['searchpost-query'])){
+                    header('Location:/posts/searchpost');
+                    exit();
+                }else{
+                    $query = htmlspecialchars($_POST['searchpost-query']);
+                    $postsFound = $this->model->findPost($query);
+                    if ($postsFound){
+                        $data['postsfound'] =  $postsFound;
+                        $this->view->generate('Searchpost.php', 'Postslayout.php', $data);
+                        exit();
+                    }
+                }
+            }else{
+                $this->view->generate('Searchpost.php', 'Postslayout.php', $data);
+            }
         }else {
             header("Location: /");
             }
@@ -53,21 +70,23 @@ class Controllerposts extends Controller
 
         }
     }
-    public function actionSearchpostact(){
-        if(isset($_POST['search-post'])){
-            if(empty($_POST['searchpost-query'])){
-                header('Location:/posts/makepost?emptyfields');
-                exit();
-            }else{
-                $query = htmlspecialchars($_POST['searchpost-query']);
-                $postsFound = $this->model->findPost($query);
-                if ($postsFound){
-                    var_dump($postsFound);
-
+    // public function actionSearchpostact(){
+    //     if(isset($_POST['post-searchpost'])){
+    //         if(empty($_POST['searchpost-query'])){
+    //             header('Location:/posts/searchpost');
                 
-                }
+    //             exit();
+    //         }else{
+    //             $query = htmlspecialchars($_POST['searchpost-query']);
+    //             $postsFound = $this->model->findPost($query);
+    //             if ($postsFound){
+    //                 $data['postsfound'] =  $postsFound;
+    //                 header('Location: /posts/postlist');
+    //                 $this->view->generate('Postlist.php', 'Postslayout.php', $data);
+    //                 exit();
+    //             }
                     
-            }
-        }
-    }
+    //         }
+    //     }
+    // }
 }

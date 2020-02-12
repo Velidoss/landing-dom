@@ -25,11 +25,9 @@ class ModelPosts extends Dbh
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$query]);
         $result = $stmt->fetchAll();
-        var_dump($result);
+       
         if($result){    
             return $result;
-            header("Location: /posts/searchpost");
-            exit();
         }
         
     }

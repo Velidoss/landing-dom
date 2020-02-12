@@ -62,7 +62,7 @@ class ModelUser extends Dbh{
         $selector = bin2hex(random_bytes(8));
         $token = random_bytes(32);
     
-        $url = "https://".$_SERVER['HTTP_HOST']."/changepwd.php?selector=".$selector."&validator=".bin2hex($token);
+        $url = "https://".$_SERVER['HTTP_HOST']."/user/changepwd?selector=".$selector."&validator=".bin2hex($token);
         $expires = date("U") + 1800;
 
         $userEmail = $post["renew-email"];
