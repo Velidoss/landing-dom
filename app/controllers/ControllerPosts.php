@@ -15,7 +15,6 @@ class Controllerposts extends Controller
     {
         if (isset($_SESSION['userId'])) {
             $data = [];
-
             $data['posts'] = $this->model->showPostlist();
             $this->view->generate('Postlist.php', 'Postslayout.php', $data);
         } else {
@@ -26,13 +25,12 @@ class Controllerposts extends Controller
         if (isset($_SESSION['userId'])) {
         $this->view->generate('Makepost.php', 'Postslayout.php');
     }else {
-        header("Location: /");
+        header("Location: /posts/postlist");
         }
     }
     public function actionSearchpost(){
         if (isset($_SESSION['userId'])) {
             $data = [];
-            
             if(isset($_POST['post-searchpost'])){
                 if(empty($_POST['searchpost-query'])){
                     header('Location:/posts/searchpost');
@@ -66,27 +64,9 @@ class Controllerposts extends Controller
                 $postDateTime = date("Y-m-d H:i:s");
                 $postAuthor = $_SESSION['userUid'];
                 $this->model->createPost($postTitle,  $postText, $postDateTime, $postCategory, $postAuthor);
-            }
+                $this->view->redirect("/user/posts");            }
 
         }
     }
-    // public function actionSearchpostact(){
-    //     if(isset($_POST['post-searchpost'])){
-    //         if(empty($_POST['searchpost-query'])){
-    //             header('Location:/posts/searchpost');
-                
-    //             exit();
-    //         }else{
-    //             $query = htmlspecialchars($_POST['searchpost-query']);
-    //             $postsFound = $this->model->findPost($query);
-    //             if ($postsFound){
-    //                 $data['postsfound'] =  $postsFound;
-    //                 header('Location: /posts/postlist');
-    //                 $this->view->generate('Postlist.php', 'Postslayout.php', $data);
-    //                 exit();
-    //             }
-                    
-    //         }
-    //     }
-    // }
+
 }

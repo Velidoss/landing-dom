@@ -6,7 +6,7 @@ class ModelPosts extends Dbh
 {
     public function showPostlist()
     {
-        $sql = "SELECT postAuthor, postDateTime, postTitle, postContent from posts;";
+        $sql = "SELECT postAuthor, postDateTime, postTitle, postContent from posts order by postDateTime DESC ;";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();
@@ -16,8 +16,7 @@ class ModelPosts extends Dbh
         $sql = "INSERT INTO posts (postTitle, postContent , postDateTime , postCategory , postAuthor ) VALUES (?,?,?,?,?);";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$postTitle, $postText, $postDateTime, $postCategory, $postAuthor]);
-        header("Location: /posts/makepost");
-        exit();
+
         
     }
     public function findPost($query){

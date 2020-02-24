@@ -6,11 +6,7 @@ class View
 {
     public function generate($contentView, $templateView, $data = null)
     {
-        
-
         include 'app/views/' . $templateView;
-
-       
     }
     public static function errorCode($code){
         http_response_code($code);
@@ -19,6 +15,14 @@ class View
             require $path;
         }
         exit();
+    }
+    public function redirect($url){
+        header("Location: /");
+        exit();
+    }
+
+    public function message($status, $message){
+        exit(json_encode(['status'=>$status , 'message'=>$message]));
     }
 
 }

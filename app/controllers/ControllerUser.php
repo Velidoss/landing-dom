@@ -75,7 +75,7 @@ class ControllerUser extends Controller
             }
             
         }
-        echo 'Вы зарегистрированы';
+        $this->view->redirect('/user/login');
 
     }
     public function actionLoginUser(){
