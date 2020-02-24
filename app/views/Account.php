@@ -8,53 +8,40 @@
       <div class="section-account__userinfo-data">
         <div class="section-account__userinfo-data-item">
           <?php foreach ($data['userData'] as $key => $info) { ?>
-            <div class="data-item-info">
-              <p class="name-surname"><?php echo $info['userName'] ?> </p>
+            <div class="item-info">
+                <form class="item-info__form" action="/user/changeName" method="POST">
+                    <input name="new-name" class="item-info__form-data" type="text" value="<?php echo $info['userName'] ?>">
+                    <button class="item-info__form-btn" type="submit" name="changeName-submit">
+                        <img src="/img/svg/edit-solid.svg" alt="">
+                    </button>
+                </form>
             </div>
           <?php } ?>
-          <button class="open-form-btn" type="submit" name="open-form">
-            <img src="/img/svg/edit-solid.svg" alt="">
-          </button>
-          <form class="change-data-form" action="/user/changeName" method="POST">
-            <input type="text" name="new-name">
-            <button class="change-data-btn" type="submit" name="changeName-submit">
-              <img src="/img/svg/edit-solid.svg" alt="">
-            </button>
-          </form>
         </div>
-        <div class="section-account__userinfo-data-item">
-          <?php foreach ($data['userData'] as $key => $info) { ?>
-            <div class="data-item-info">
-              <p class="name-age"><?php echo $info['userBrthDate'] ?> </p>
-            </div>
-          <?php } ?>
-          <button class="open-form-btn" type="submit" name="open-form">
-            <img src="/img/svg/edit-solid.svg" alt="">
-          </button>
-          <form class="change-data-form" action="/user/changeDateBirth" method="POST">
-            <input type="text" name="new-birthdate">
-            <button class="change-data-btn" type="submit" name="changeDateBirth-submit">
-              <img src="/img/svg/edit-solid.svg" alt="">
-            </button>
-          </form>
-        </div>
-        <div class="section-account__userinfo-data-item">
-          <?php foreach ($data['userData'] as $key => $info) { ?>
-            <div class="data-item-info">
-              <p class="name-description"><?php echo $info['userInfo'] ?> </p>
-            </div>
-          <?php } ?>
-          <button class="open-form-btn" type="submit" name="open-form">
-            <img src="/img/svg/edit-solid.svg" alt="">
-          </button>
-          <form class="change-data-form" action="/user/changeData" method="POST">
-            <textarea name="new-userdata" id="" cols="30" rows="4"></textarea>
-            <button class="change-data-btn" type="submit" name="changeData-submit">
-              <img src="/img/svg/edit-solid.svg" alt="">
-            </button>
-          </form>
-        </div>
-
+          <div class="section-account__userinfo-data-item">
+              <?php foreach ($data['userData'] as $key => $info) { ?>
+                  <div class="item-info">
+                      <form class="item-info__form" action="/user/changeDateBirth" method="POST">
+                          <input name="new-birthdate" class="item-info__form-data" type="text" value="<?php echo $info['userBrthDate'] ?>">
+                          <button class="item-info__form-btn" type="submit" name="changeDateBirth-submit">
+                              <img src="/img/svg/edit-solid.svg" alt="">
+                          </button>
+                      </form>
+                  </div>
+              <?php } ?>
+          </div>
+          <div class="section-account__userinfo-data-item">
+              <?php foreach ($data['userData'] as $key => $info) { ?>
+                  <div class="item-info">
+                      <form class="item-info__form" action="/user/changeData" method="POST">
+                          <input name="new-userdata" class="item-info__form-data" type="text" value="<?php echo $info['userInfo'] ?>">
+                          <button class="item-info__form-btn" type="submit" name="changeData-submit">
+                              <img src="/img/svg/edit-solid.svg" alt="">
+                          </button>
+                      </form>
+                  </div>
+              <?php } ?>
+          </div>
       </div>
     </div>
     <div class="section-account__userstatistics">

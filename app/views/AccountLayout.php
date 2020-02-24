@@ -91,6 +91,5 @@
     <!-- footer -->
 </body>
 <script src="/js/toggle.js"></script>
-<script src="/js/editinfo.js"></script>
 <script src="/js/tabmenu.js"></script>
 </html>

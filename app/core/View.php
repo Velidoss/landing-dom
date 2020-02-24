@@ -17,7 +17,7 @@ class View
         exit();
     }
     public function redirect($url){
-        header("Location: /");
+        header("Location: ".$url);
         exit();
     }
 

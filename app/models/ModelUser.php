@@ -171,27 +171,18 @@ class ModelUser extends Dbh{
         $sql = "UPDATE userdata SET userName =? WHERE userid=?;";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$newName, $userId]);
-        header("Location: ../user/account/success");
-        echo 'Имя пользователя успешно изменено!';
-        exit();
     }
 
     public function changeUserBrthDate($newData, $userId ){
         $sql = "UPDATE userdata SET userBrthDate =? WHERE userid=?;";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$newData, $userId]);
-        header("Location: ../user/account/success");
-        echo 'Дата рождения пользователя успешно изменена!';
-        exit();
     }
 
     public function changeUserInfo($newData, $userId ){
         $sql = "UPDATE userdata SET userInfo =? WHERE userid=?;";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$newData, $userId]);
-        header("Location: ../user/account/success");
-        echo 'Информация пользователя успешно изменена!';
-        exit();
     }
 
     public function selectUserData($userId){

@@ -317,7 +317,7 @@ body {
 
             input {
                 margin-bottom: 22px;
-                font-size: 15;
+                font-size: 15px;
                 color: #dadada;
                 line-height: 60px;
                 padding: 0 20px;
@@ -630,7 +630,7 @@ body {
             &-input {
                 margin-bottom: 22px;
                 width: 100%;
-                font-size: 15;
+                font-size: 15px;
                 color: #999999;
                 line-height: 60px;
                 padding: 0 20px;
@@ -642,7 +642,7 @@ body {
             &-textarea {
                 margin-bottom: 22px;
                 width: 100%;
-                font-size: 15;
+                font-size: 15px;
                 color: #999999;
                 line-height: 20px;
                 padding: 20px 20px;
@@ -758,53 +758,37 @@ body {
             flex-direction: column;
 
             &-item {
-                display: flex;
-                align-items: center;
-                padding: 10px 0;
+                padding-top: 10px;
                 border-bottom: 1px solid #000;
-                justify-content: space-between;
-                flex-direction: row;
-
-                .data-item-info {
+                .item-info {
                     position: relative;
-
-                    p {
-                        font-size: 15px;
-                        color: #999999;
-                    }
-                }
-
-                button {
-                    background: none;
-                    border: none;
-                    justify-self: flex-end;
-
-                    img {
-                        height: 20px;
-                        width: 20px;
-                        color: #999999;
-                    }
-                }
-
-                form {
-                    position: absolute;
-                    display: none;
-
-                    button {
-                        background: none;
-                        border: none;
-                        justify-self: flex-end;
-
-                        img {
-                            height: 20px;
-                            width: 20px;
-                            color: #999999;
+                    &__form {
+                        position: relative;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: space-between;
+                        &-data{
+                            background: none;
+                            border: none;
+                            flex-grow: 1;
+                            line-height: 30px;
+                            padding-left: 10px;
+                        }
+                        &-btn {
+                            background: none;
+                            border: none;
+                            justify-self: flex-end;
+                            flex-shrink: 0;
+                            img {
+                                height: 20px;
+                                width: 20px;
+                                color: #999999;
+                            }
                         }
                     }
                 }
             }
-
-
         }
     }
 
@@ -1041,7 +1025,7 @@ body {
         &-input {
             margin-bottom: 22px;
             width: 100%;
-            font-size: 15;
+            font-size: 15px;
             color: #999999;
             line-height: 60px;
             padding: 0 20px;
@@ -1053,7 +1037,7 @@ body {
         &-textarea {
             margin-bottom: 22px;
             width: 100%;
-            font-size: 15;
+            font-size: 15px;
             color: #999999;
             line-height: 20px;
             padding: 20px 20px;
@@ -1100,7 +1084,7 @@ body {
         &-input {
             margin-bottom: 22px;
             width: 60%;
-            font-size: 15;
+            font-size: 15px;
             color: #999999;
             line-height: 60px;
             padding: 0 20px;

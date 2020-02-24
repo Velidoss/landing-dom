@@ -194,6 +194,7 @@ class ControllerUser extends Controller
             }
             else{
                 $this->model->changeUserName($newName, $userId );
+                $this->view->redirect('/user/account');
             }
         }else{
             header("Location: ../user/account");
@@ -215,6 +216,7 @@ class ControllerUser extends Controller
             }
             else{
                 $this->model->changeUserBrthDate($newData, $userId );
+                $this->view->redirect('/user/account');
             }
         }else{
             header("Location: ../user/account");
@@ -236,6 +238,7 @@ class ControllerUser extends Controller
             }
             else{
                 $this->model->changeUserInfo($newData, $userId );
+                $this->view->redirect('/user/account');
             }
         }else{
             header("Location: ../user/account");
