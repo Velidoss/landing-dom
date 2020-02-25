@@ -17,7 +17,7 @@
         <?php foreach ($data['postsfound'] as $num => $post) { ?>
             <div class="section-postlist__post">
                 <div class="section-postlist__post-info">
-                    <img class="section-postlist__post-info-pic" src="/img/anon.png" alt="" />
+                    <img class="section-postlist__post-info-pic" src="/img/userimage/anon.png" alt="" />
                     <p class="section-postlist__post-info-author"><?php echo $post['postAuthor'] ?></p>
                     <p class="section-postlist__post-info-dateposted"><?php echo $post['postDateTime'] ?></p>
                 </div>

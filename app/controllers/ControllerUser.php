@@ -40,6 +40,11 @@ class ControllerUser extends Controller
             $data['domains'] = $this->model->selectDomains($_SESSION['userId']);
             $data['userData'] = $this->model->selectUserData($_SESSION['userId']);
             $data['userPosts'] = $this->model->selectUserPosts($_SESSION['userUid']);
+            if($this->model->checkImg()){
+                $data['userImg'] = $_SESSION['userId'].".jpg";
+            }else{
+                $data['userImg'] = "anon.png";
+            }
             $this->view->generate('Account.php', 'AccountLayout.php', $data);
             
 
@@ -49,7 +54,6 @@ class ControllerUser extends Controller
         
         
     }
-
 
     public function actionRegisterUser(){
         if (isset($_POST['register-submit'])){
@@ -232,6 +236,10 @@ class ControllerUser extends Controller
                 header("Location: ../user/account");
                 exit();
             }
+            elseif( strlen($newData) >150){
+                header("Location: ../user/account?error=dontmatch");
+                exit();
+            }
             elseif( !preg_match("/^[a-zA-Z0-9(\.,\-?!\s\\%\/$\#;)]*$/", $newData)){
                 header("Location: ../user/account?error=dontmatch");
                 exit();
@@ -278,6 +286,20 @@ class ControllerUser extends Controller
             
         }else{
             header('Location: /');
+        }
+    }
+
+    public function actionChangeImg(){
+        if (isset($_POST['changeimg-submit'])){
+            if(empty($_FILES["new-image"]["tmp_name"])){
+                $this->model->unsetImg();
+                $this->view->redirect('/user/account');
+                exit();
+            }else{
+                $this->model->setImg($_FILES);
+                $this->view->redirect('/user/account');
+                exit();
+            }
         }
     }
 

@@ -1,6 +1,7 @@
 .sass-cache/
 .vscode/
 .idea/
+.img/userimage/
 
 *.css.map
 *.sass.map

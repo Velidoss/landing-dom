@@ -1,9 +1,13 @@
 <!-- account-info -->
-<div class="seciotn-outer section-account">
+<div class="section-outer section-account">
   <div class="section-inner">
     <div class="section-account__userinfo">
       <div class="section-account__userinfo-img">
-        <img src="/img/anon.png" alt="anon" />
+        <img src="/img/userimage/<?php echo $data['userImg']; ?> " alt="anon" />
+          <form class="section-account__userinfo-changeimg" action="/user/changeImg" enctype="multipart/form-data" method="post">
+              <input name="new-image" type="file">
+              <button name="changeimg-submit" type="submit">Change image</button>
+          </form>
       </div>
       <div class="section-account__userinfo-data">
         <div class="section-account__userinfo-data-item">
@@ -34,7 +38,9 @@
               <?php foreach ($data['userData'] as $key => $info) { ?>
                   <div class="item-info">
                       <form class="item-info__form" action="/user/changeData" method="POST">
-                          <input name="new-userdata" class="item-info__form-data" type="text" value="<?php echo $info['userInfo'] ?>">
+                          <textarea name="new-userdata" class="item-info__form-textarea" type="text"
+                          rows = "5"><?php echo
+                              $info['userInfo'] ?></textarea>
                           <button class="item-info__form-btn" type="submit" name="changeData-submit">
                               <img src="/img/svg/edit-solid.svg" alt="">
                           </button>

@@ -912,8 +912,9 @@ body {
     .section-account__userinfo-img {
       margin-bottom: 20px; }
       .section-account__userinfo-img img {
-        width: 120px;
-        height: 120px; }
+        width: 200px;
+        height: 200px;
+        border-radius: 50%; }
     .section-account__userinfo-data {
       display: flex;
       flex-direction: column; }
@@ -929,6 +930,12 @@ body {
             align-items: center;
             justify-content: space-between; }
             .section-account__userinfo-data-item .item-info__form-data {
+              background: none;
+              border: none;
+              flex-grow: 1;
+              line-height: 30px;
+              padding-left: 10px; }
+            .section-account__userinfo-data-item .item-info__form-textarea {
               background: none;
               border: none;
               flex-grow: 1;

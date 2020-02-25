@@ -748,8 +748,9 @@ body {
             margin-bottom: 20px;
 
             img {
-                width: 120px;
-                height: 120px;
+                width: 200px;
+                height: 200px;
+                border-radius: 50%;
             }
         }
 
@@ -769,6 +770,14 @@ body {
                         align-items: center;
                         justify-content: space-between;
                         &-data{
+                            background: none;
+                            border: none;
+                            flex-grow: 1;
+                            line-height: 30px;
+                            padding-left: 10px;
+
+                        }
+                        &-textarea{
                             background: none;
                             border: none;
                             flex-grow: 1;
@@ -812,6 +821,7 @@ body {
                 border-radius: 5px 5px 0 0;
             }
         }
+
 
         &-tabcontent {
             border-top: 1px solid #999999;
