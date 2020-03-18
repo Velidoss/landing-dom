@@ -40,7 +40,7 @@ class ControllerUser extends Controller
             $data['domains'] = $this->model->selectDomains($_SESSION['userId']);
             $data['userData'] = $this->model->selectUserData($_SESSION['userId']);
             $data['userPosts'] = $this->model->selectUserPosts($_SESSION['userUid']);
-            if($this->model->checkImg()){
+            if($this->model->checkImg($_SESSION['userId'])){
                 $data['userImg'] = $_SESSION['userId'].".jpg";
             }else{
                 $data['userImg'] = "anon.png";

@@ -10,6 +10,7 @@ class Route
         //контроллер по умолчанию
         $controllerName = 'Main';
         $actionName = 'Index';
+        $itemnum = '';
 
         $routes = explode('/', $_SERVER['REQUEST_URI']);
 
@@ -19,6 +20,7 @@ class Route
         if (!empty($routes[2])) {
             $actionName = $routes[2];
         }
+
 
         $modelName = 'Model' . ucfirst($controllerName);
         $controllerName = 'Controller' . ucfirst($controllerName);
@@ -41,8 +43,14 @@ class Route
         }
         $controller = new $controllerName;
         $action = $actionName;
-        if (method_exists($controller, $action)) {
-            $controller->$action();
+        if (method_exists($controller, $action)) {        
+            if (!empty($routes[3])) {
+                $itemnum = $routes[3];
+                $controller->$action($itemnum);
+            }else{
+                $controller->$action();
+            }
+            
         } else {
             View::errorCode(404);
         }

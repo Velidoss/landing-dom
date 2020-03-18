@@ -30,7 +30,7 @@ class ModelUser extends Dbh{
             
             $sql = "INSERT INTO userdata(userId, picStatus) VALUES (?,?)";
             $stmt = $this->db->prepare($sql);
-            $stmt->execute([$result['idUsers'], 1]);
+            $stmt->execute([$result['idUsers'], 0]);
         }
 
 
@@ -219,7 +219,7 @@ class ModelUser extends Dbh{
             if(in_array($file["new-image"]["type"] , $allowed_types)){
                 if($file["new-image"]["tmp_name"]){
                     move_uploaded_file($file["new-image"]["tmp_name"], $uploadDir.$_SESSION['userId'].".jpg" );
-                    $sql = "UPDATE userdata SET picStatus =0 WHERE userid=:sessionId;";
+                    $sql = "UPDATE userdata SET picStatus =1 WHERE userid=:sessionId;";
                     $stmt = $this->db->prepare($sql);
                     $stmt->bindValue(':sessionId',$_SESSION['userId'] );
                     $stmt->execute();
@@ -238,7 +238,7 @@ class ModelUser extends Dbh{
         if($this->checkImg()){
             $uploadDir = "img/userimage/";
             unlink($uploadDir.$_SESSION['userId'].".jpg");
-            $sql = "UPDATE userdata SET picStatus = 1 WHERE userId=:sessionId;";
+            $sql = "UPDATE userdata SET picStatus = 0 WHERE userId=:sessionId;";
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(':sessionId',$_SESSION['userId'] );
             $stmt->execute();
@@ -249,13 +249,13 @@ class ModelUser extends Dbh{
 
     }
 
-    public function checkImg(){
+    public function checkImg($id){
         $sql = "SELECT picStatus FROM userdata WHERE userId=:sessionId; ";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':sessionId',$_SESSION['userId'] );
+        $stmt->bindValue(':sessionId',$id );
         $stmt->execute();
         $result = $stmt->fetch();
-        if ($result['picStatus'] == 0){
+        if ($result['picStatus'] == 1){
             return true;
         }else{
             return false;

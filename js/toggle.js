@@ -20,3 +20,24 @@ let ToggleNav = function() {
     toggleNavStatus = false;
   }
 };
+
+// вывод поля для ввода комментария к посту
+let toggleCommentFieldStatus = false;
+
+let ToggleCommentField = function(){
+  let getToggleBtn = document.querySelector(".section-postlist__post-actions-comment_btn");
+  let getCommentField = document.querySelector(".section-postlist__post-actions-comment_make");
+  
+
+  if(toggleCommentFieldStatus ===false){
+      getCommentField.style.display = "flex";
+      getToggleBtn.style.display = "none";
+      toggleCommentFieldStatus = true;
+  } 
+  else if (toggleCommentFieldStatus === true){
+    getCommentField.style.display = "none";
+    getToggleBtn.style.display = "flex";
+    toggleCommentFieldStatus = false;
+  }
+
+}

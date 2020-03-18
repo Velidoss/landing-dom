@@ -1,6 +1,8 @@
 <?php
 
 require_once 'app/models/ModelPosts.php';
+require_once "app/models/ModelUser.php";
+
 use app\core\View;
 class Controllerposts extends Controller
 {
@@ -14,13 +16,62 @@ class Controllerposts extends Controller
     public function actionPostlist()
     {
         if (isset($_SESSION['userId'])) {
+            $modelUser = new ModelUser();
             $data = [];
             $data['posts'] = $this->model->showPostlist();
+            for($i=0; $i <count($data['posts']); $i++){
+                if ($modelUser->checkImg($data['posts'][$i]['postAuthorId'])){
+                    $data['posts'][$i]['userImg'] = "/img/userimage/".$data['posts'][$i]['postAuthorId'].".jpg";
+                }else{
+                    $data['posts'][$i]['userImg'] = "/img/userimage/anon.png";
+                }
+            }
             $this->view->generate('Postlist.php', 'Postslayout.php', $data);
         } else {
             header("Location: /");
         }
     }
+
+    public function actionPost($postId)
+    {
+        if(isset($_SESSION['userId'])){
+            $modelUser = new ModelUser();
+            $data = [];
+            $data['post'] = $this->model->showPost($postId);
+            $data['comments'] =$this->model->showComments($postId);
+            foreach($data['comments'] as $comment){
+                $comment['commentAuthorName'] = $modelUser->selectUserData($comment['commentAuthor']);
+            }
+            if ($modelUser->checkImg($data['post']['postAuthorId'])){
+                $data['post']['userImg'] = "/img/userimage/".$data['post']['postAuthorId'].".jpg";
+            }else{
+                $data['post']['userImg'] = "/img/userimage/anon.png";
+            }
+            $this->view->generate('Post.php', 'Postslayout.php', $data);
+        }
+        else {
+            header("Location: /");
+        }
+    }
+
+    public function actionMakecomment($postId)
+    {
+        if(isset($_POST['comment-submit'])){
+            if(empty($_POST['comment-text'])){
+                header('Location:/posts/post/'.$postId);
+                exit();
+            }else{
+                $commentAuthor = $_SESSION['userId'];
+                $commentText = $_POST['comment-text'];
+                $commentDate = date("Y-m-d H:i:s");
+                $commentPost = $postId;
+                $this->model->makeComment($commentAuthor , $commentText , $commentPost , $commentDate);
+                $this->view->redirect("/posts/post/".$postId); 
+            }
+        }
+    }
+
+
     public function actionMakepost(){
         if (isset($_SESSION['userId'])) {
         $this->view->generate('Makepost.php', 'Postslayout.php');
@@ -28,6 +79,7 @@ class Controllerposts extends Controller
         header("Location: /posts/postlist");
         }
     }
+
     public function actionSearchpost(){
         if (isset($_SESSION['userId'])) {
             $data = [];
@@ -63,8 +115,11 @@ class Controllerposts extends Controller
                 $postCategory = htmlspecialchars($_POST['postcategory']);
                 $postDateTime = date("Y-m-d H:i:s");
                 $postAuthor = $_SESSION['userUid'];
-                $this->model->createPost($postTitle,  $postText, $postDateTime, $postCategory, $postAuthor);
-                $this->view->redirect("/user/posts");            }
+                $postAuthorId = $_SESSION['userId'];
+                $postImg = $_FILES['post-img']['tmp_name'];
+                $this->model->createPost($postTitle,  $postText, $postDateTime, $postCategory, $postAuthor,
+                    $postAuthorId,$postImg);
+                $this->view->redirect("/posts/postlist");            }
 
         }
     }
