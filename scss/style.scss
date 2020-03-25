@@ -242,7 +242,7 @@ body {
 .section-domainreg {
 
     .section-inner {
-        height: calc(100vh - 102px);
+        height: calc(100vh - 267px);
         z-index: 10;
         display: flex;
         flex-direction: column;
@@ -579,7 +579,8 @@ body {
 
 // === contact === 
 .section-contact {
-    @include section_paddings();
+    padding-top: 60px;
+    padding-bottom: 60px;
     background: url('/img/bgcontact.png') no-repeat 50% 50%;
     background-size: cover;
     position: relative;
@@ -603,7 +604,7 @@ body {
         flex-direction: column;
         align-items: center;
         max-width: 560px;
-
+        
     }
 
     &__title {
@@ -980,16 +981,33 @@ body {
                 display: none;
             }
             &-like , &-dislike {
-                img{
-                    width: 15px;
-                    height: 15px;
-                    &:last-child{
-                        margin-left: 30px;
+                button{
+                    border:none;
+                    background: none;
+                    margin-left: 30px;
+                    padding: 10px;
+                    border-radius: 50%;
+                    &:hover{
+                        background-color:#a6a6a6 ;
+                    }
+                    img{
+                        width: 15px;
+                        height: 15px;
                     }
                 }
             }
         }
-
+        &-comments{
+            &-comment{
+                .comment_author_img{
+                    img{
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 50%;
+                    }
+                }
+            }
+        }
     }
 }
 

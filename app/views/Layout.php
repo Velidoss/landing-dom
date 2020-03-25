@@ -31,6 +31,7 @@
                         <li><a href="/user/domainreg">Register domain name</a></li>
                         <li><a href="/user/account">Account</a></li>
                         <li><a href="/posts/postlist">Posts</a></li>
+                        <li><a href="/main/contact">Contact us</a></li>
                         <li>
                             <form action="/user/logout" method="POST">
                                 <button class="logout-btn" name="logout-submit" type="submit">
@@ -38,11 +39,14 @@
                                 </button>
                             </form>
                         </li>
-                    <?php } else {; ?>
+                    <?php } else {
+        ; ?>
                         <li><a href="/">Home</a></li>
                         <li><a href="/user/register">Signup</a></li>
                         <li><a href="/user/login">Login</a></li>
-                    <?php } ?>
+                        <li><a href="/main/contact">Contact us</a></li>
+                    <?php
+    } ?>
                 </ul>
             </nav>
             <div class="section-header__toggler">
@@ -69,37 +73,18 @@
                         </button>
                     </form>
                 </li>
-            <?php } else {; ?>
+            <?php } else {
+        ; ?>
                 <li><a href="/">Home</a></li>
                 <li><a href="/user/domainreg">Signup</a></li>
                 <li><a href="/user/login">Login</a></li>
-            <?php } ?>
+            <?php
+    } ?>
         </ul>
     </div>
     <!-- toggle-menu -->
     <?php
     include 'app/views/' . $contentView; ?>
-    <!-- contact -->
-    <section class="section-outer section-contact">
-        <div class="section-inner">
-            <div class="section-contact__title">Stay with us</div>
-            <div class="section-contact__text">We ensure quailty & support</div>
-            <div class="section-contact__contact">
-                <form action="" class="section-contact__contact-form">
-                    <input class="section-contact__contact-form-input" type="text" placeholder="Full Name" />
-                    <input class="section-contact__contact-form-input" type="email" placeholder="Email Adress" />
-                    <textarea class="section-contact__contact-form-textarea" rows="8" placeholder="Message"></textarea>
-                    <div class="section-contact__contact-form-buttons">
-                        <label for="checkbox" class="checkbox"><input id="checkbox" type="checkbox" />
-                            <span>Subscribe for newsletter</span>
-                        </label>
-                        <button type="submit" class="btn-main">Send</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
-    <!-- contact -->
     <!-- footer -->
     <section class="section-outer section-footer">
         <div class="section-inner">

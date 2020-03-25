@@ -36,19 +36,21 @@ class ModelPosts extends Dbh
        
         if($result) {
             return $result;
+        }else{
+            return null;
         }
     }
 
-    public function makeComment($commentAuthor , $commentText , $commentPost , $commentDate )
+    public function makeComment($commentAuthor , $commentText , $commentPost , $commentDate , $commnetAuthorName)
     {
-        $sql = "INSERT INTO comments ( commentAuthor , commentText , commentToPost, commentDate) VALUES (?,?,?,?);";
+        $sql = "INSERT INTO comments ( commentAuthor , commentText , commentToPost, commentDate, commentAuthorName) VALUES (?,?,?,?,?);";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([$commentAuthor , $commentText , $commentPost, $commentDate  ]);
+        $stmt->execute([$commentAuthor , $commentText , $commentPost, $commentDate , $commnetAuthorName ]);
     }
 
     public function showComments($postId)
     {
-        $sql = "SELECT commentAuthor , commentText , commentToPost, commentDate FROM comments WHERE commentToPost=?;";
+        $sql = "SELECT commentAuthor , commentText , commentToPost, commentDate , commentAuthorName FROM comments WHERE commentToPost=?;";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$postId]);
 
@@ -58,4 +60,27 @@ class ModelPosts extends Dbh
             return $result;
         }
     }
+
+    public function makeLike($postId, $userId)
+    {
+        $sql = "INSERT INTO postlikes( postId , likeFrom ) VALUES (?,?);";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$postId, $userId]);
+    }
+
+    public function checkLike($userId)
+    {
+        $sql = "SELECT postId , likeFrom FROM postlikes WHERE likeFrom=?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$userId]);
+        $result = $stmt->fetchAll();
+        file_put_contents('content1.json' , $result);
+        if(!isset($result)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+ 
 }

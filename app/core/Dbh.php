@@ -1,10 +1,9 @@
 <?php
 
-
 class Dbh
 {
-
     protected $db;
+
     public function __construct()
     {
         require 'app/config/db.php';
@@ -16,5 +15,33 @@ class Dbh
             echo 'Невозможно установить соединение с базой данных' . $ex->getMessage();
             file_put_contents('PDOErrors.txt', $ex->getMessage(), FILE_APPEND);
         }
+    }
+
+    public function query($sql, $params=[])
+    {
+        $stmt = $this->db->prepare($sql);
+        if (isset($params)) {
+            foreach ($params as $key => $param) {
+                if (is_numeric($param)) {
+                    $stmt->bindParam(':' . $key, $param, PDO::PARAM_INT);
+                } else {
+                    $stmt->bindParam(':' . $key, $param, PDO::PARAM_STR);
+                }
+            }
+        }
+        $stmt->execute();
+        return $stmt;
+    }
+
+    public function getRow($sql, $params=[])
+    {
+        $result = $this->query($sql, $params);
+        return $result->fetchAll();
+    }
+
+    public function getColumn($sql, $params=[])
+    {
+        $result = $this->query($sql, $params);
+        return $result->fetchColumn();
     }
 }

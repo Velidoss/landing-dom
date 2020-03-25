@@ -43,6 +43,10 @@ return [
 		'controller' => 'posts',
 		'action' => 'postlist',
 	],
+	'posts/post/{id:\d+}' => [
+		'controller' => 'posts',
+		'action' => 'post',
+	],
 	'posts/makepost' => [
 		'controller' => 'posts',
 		'action' => 'makepost',

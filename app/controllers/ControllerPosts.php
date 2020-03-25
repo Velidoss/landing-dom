@@ -39,14 +39,21 @@ class Controllerposts extends Controller
             $data = [];
             $data['post'] = $this->model->showPost($postId);
             $data['comments'] =$this->model->showComments($postId);
-            foreach($data['comments'] as $comment){
-                $comment['commentAuthorName'] = $modelUser->selectUserData($comment['commentAuthor']);
-            }
             if ($modelUser->checkImg($data['post']['postAuthorId'])){
                 $data['post']['userImg'] = "/img/userimage/".$data['post']['postAuthorId'].".jpg";
             }else{
                 $data['post']['userImg'] = "/img/userimage/anon.png";
             }
+            if(isset($data['comments'])){
+                for($i=0; $i<count($data['comments']); $i++){
+                    if($modelUser->checkImg($data['comments'][$i]['commentAuthor'])){
+                        $data['comments'][$i]['commentAuthorImg'] = "/img/userimage/".$data['comments'][$i]['commentAuthor'].".jpg";
+                    }else{
+                        $data['comments'][$i]['commentAuthorImg'] = "/img/userimage/anon.png";
+                    }
+                }
+            }
+
             $this->view->generate('Post.php', 'Postslayout.php', $data);
         }
         else {
@@ -65,7 +72,9 @@ class Controllerposts extends Controller
                 $commentText = $_POST['comment-text'];
                 $commentDate = date("Y-m-d H:i:s");
                 $commentPost = $postId;
-                $this->model->makeComment($commentAuthor , $commentText , $commentPost , $commentDate);
+                $modelUser = new ModelUser();
+                $commentAuthorName = $modelUser->selectUserData($_SESSION['userId'])[0]['userName'];
+                $this->model->makeComment($commentAuthor , $commentText , $commentPost , $commentDate, $commentAuthorName );
                 $this->view->redirect("/posts/post/".$postId); 
             }
         }
@@ -94,6 +103,8 @@ class Controllerposts extends Controller
                         $data['postsfound'] =  $postsFound;
                         $this->view->generate('Searchpost.php', 'Postslayout.php', $data);
                         exit();
+                    }else{
+                        header("Location: /");
                     }
                 }
             }else{
@@ -121,6 +132,17 @@ class Controllerposts extends Controller
                     $postAuthorId,$postImg);
                 $this->view->redirect("/posts/postlist");            }
 
+        }
+    }
+    public function actionPostlike($postId)
+    {
+        $likeFrom = $_SESSION['userId'];
+        $check = $this->model->checkLike($likeFrom);
+        if(isset($check)){
+            $this->model->makeLike($postId, $likeFrom);
+            $this->view->redirect('/posts/post/'.$postId);  
+        }else{
+            $this->view->redirect('/posts/postlist');
         }
     }
 

@@ -19,21 +19,28 @@
                 <form class="section-postlist__post-actions-comment_make" action="/posts/makecomment/<?php echo $data['post']['postId'] ?>" method="POST">
                     <textarea  name="comment-text" id="" cols="30" rows="5" placeholder="Type a comment"></textarea>  
                     <button onclick="ToggleCommentField()" class="section-postlist__post-actions-comment_make-btn" name="comment-submit" type="submit">Submit</button>
-                </form>        
-                <a class="section-postlist__post-actions-like"><img src="/img/svg/thumbs-up-solid.svg" alt=""></a>
-                <a class="section-postlist__post-actions-dislike"><img src="/img/svg/thumbs-down-solid.svg" alt=""></a>
+                </form>
+                <form class="section-postlist__post-actions-like" action="/posts/postlike/<?php echo $data['post']['postId'] ?>" method="post">
+                    <button type="submit" name="like-btn"><img src="/img/svg/thumbs-up-solid.svg" alt=""></button>
+                </form>
+                <form class="section-postlist__post-actions-dislike" action="/posts/postlike/<?php echo $data['post']['postId'] ?>" method="post">
+                    <button type="submit" name="dislike-btn"><img src="/img/svg/thumbs-down-solid.svg" alt=""></button>
+                </form>
             </div>
             <div class="section-postlist__post-comments">
-                <?php var_dump($data['comments']) ?>
-                <?php foreach ($data['comments'] as $comment): ?>
-                    <div class="section-postlist__post-comments-comment">
-                        <div class="comment_text"><?php echo $comment['commentText'] ?></div>
-                        <div class="comment_info">
-                            <p class="comment_info-author"></p>
-                            <p class="comment_info-date"></p>
-                        </div>
-                    </div>
-                <?php endforeach ?>
+                <?php 
+                    if(isset($data['comments'])):
+                        foreach ($data['comments'] as $comment): ?>
+                            <div class="section-postlist__post-comments-comment">
+                                <div class="comment_author_img"><img src="<?php echo $comment['commentAuthorImg'] ?>" alt=""></div>
+                                <div class="comment_text"><?php echo $comment['commentText'] ?></div>
+                                <div class="comment_info">
+                                    <p class="comment_info-author"><?php echo $comment['commentAuthorName'] ?></p>
+                                    <p class="comment_info-date"><?php echo $comment['commentDate'] ?></p>
+                                </div>
+                            </div>
+                        <?php endforeach ;
+                    endif ?>
             </div>
         </div>
     </div>

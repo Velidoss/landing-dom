@@ -567,7 +567,7 @@ body {
 .section-register .section-inner,
 .section-login .section-inner,
 .section-domainreg .section-inner {
-  height: calc(100vh - 102px);
+  height: calc(100vh - 267px);
   z-index: 10;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1076,19 +1076,12 @@ body {
 }
 
 .section-contact {
-  padding-top: 80px;
-  padding-bottom: 80px;
+  padding-top: 60px;
+  padding-bottom: 60px;
   background: url("/img/bgcontact.png") no-repeat 50% 50%;
   background-size: cover;
   position: relative;
   max-width: 100%;
-}
-
-@media (max-width: 767px) {
-  .section-contact {
-    padding-top: 30px;
-    padding-bottom: 30px;
-  }
 }
 
 .section-contact::before {
@@ -1617,13 +1610,27 @@ body {
   display: none;
 }
 
-.section-postlist__post-actions-like img, .section-postlist__post-actions-dislike img {
+.section-postlist__post-actions-like button, .section-postlist__post-actions-dislike button {
+  border: none;
+  background: none;
+  margin-left: 30px;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.section-postlist__post-actions-like button:hover, .section-postlist__post-actions-dislike button:hover {
+  background-color: #a6a6a6;
+}
+
+.section-postlist__post-actions-like button img, .section-postlist__post-actions-dislike button img {
   width: 15px;
   height: 15px;
 }
 
-.section-postlist__post-actions-like img:last-child, .section-postlist__post-actions-dislike img:last-child {
-  margin-left: 30px;
+.section-postlist__post-comments-comment .comment_author_img img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }
 
 .section-postmenu {

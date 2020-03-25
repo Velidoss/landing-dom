@@ -292,7 +292,7 @@ class ControllerUser extends Controller
     public function actionChangeImg(){
         if (isset($_POST['changeimg-submit'])){
             if(empty($_FILES["new-image"]["tmp_name"])){
-                $this->model->unsetImg();
+                $this->model->unsetImg($_SESSION['userId']);
                 $this->view->redirect('/user/account');
                 exit();
             }else{

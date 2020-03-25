@@ -234,8 +234,8 @@ class ModelUser extends Dbh{
             return false;
         }
     }
-    public function unsetImg(){
-        if($this->checkImg()){
+    public function unsetImg($id){
+        if($this->checkImg($id)){
             $uploadDir = "img/userimage/";
             unlink($uploadDir.$_SESSION['userId'].".jpg");
             $sql = "UPDATE userdata SET picStatus = 0 WHERE userId=:sessionId;";
@@ -250,9 +250,9 @@ class ModelUser extends Dbh{
     }
 
     public function checkImg($id){
-        $sql = "SELECT picStatus FROM userdata WHERE userId=:sessionId; ";
+        $sql = "SELECT picStatus FROM userdata WHERE userId=:Id; ";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':sessionId',$id );
+        $stmt->bindValue(':Id',$id );
         $stmt->execute();
         $result = $stmt->fetch();
         if ($result['picStatus'] == 1){
