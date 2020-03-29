@@ -17,29 +17,30 @@ class Dbh
         }
     }
 
-    public function query($sql, $params=[])
+    public function query($sql, $params = [])
     {
         $stmt = $this->db->prepare($sql);
-        if (isset($params)) {
+        if (!empty($params)) {
             foreach ($params as $key => $param) {
-                if (is_numeric($param)) {
-                    $stmt->bindParam(':' . $key, $param, PDO::PARAM_INT);
+                if (is_int($param)) {
+                    $type = PDO::PARAM_INT;
                 } else {
-                    $stmt->bindParam(':' . $key, $param, PDO::PARAM_STR);
+                    $type = PDO::PARAM_STR;
                 }
+                $stmt->bindValue(':' . $key, $param, $type);
             }
         }
         $stmt->execute();
         return $stmt;
     }
 
-    public function getRow($sql, $params=[])
+    public function getRow($sql, $params = [])
     {
         $result = $this->query($sql, $params);
         return $result->fetchAll();
     }
 
-    public function getColumn($sql, $params=[])
+    public function getColumn($sql, $params = [])
     {
         $result = $this->query($sql, $params);
         return $result->fetchColumn();

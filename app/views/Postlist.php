@@ -14,14 +14,18 @@
                     <div class="section-postlist__post-content-text">
                         <?php echo $post['postContent'] ?>
                     </div>
+
                 </div>
                 <div class="section-postlist__post-actions">
                     <a href="/posts/post/<?php echo $post['postId'] ?>"
                        class="section-postlist__post-actions-goto">Go to post</a>
                     <a href="/posts/post/<?php echo $post['postId'] ?>"
-                       class="section-postlist__post-actions-goto">Comment</a>
-                    <a class="section-postlist__post-actions-goto"><img src="/img/svg/thumbs-up-solid.svg" alt=""></a>
-                    <a class="section-postlist__post-actions-goto"><img src="/img/svg/thumbs-down-solid.svg" alt=""></a>
+                       class="section-postlist__post-actions-comment">Comment</a>
+                    <a href="/posts/post/<?php echo $post['postId'] ?>" class="section-postlist__post-actions-goto"><img src="/img/svg/thumbs-up-solid.svg" alt=""></a>
+                        <div class="section-postlist__post-actions-likecount">
+                            <?php echo $post['postLikeCount'] ?>
+                        </div>
+                    <a href="/posts/post/<?php echo $post['postId'] ?>" class="section-postlist__post-actions-goto"><img src="/img/svg/thumbs-down-solid.svg" alt=""></a>
                 </div>
             </div>
         <?php }; ?>

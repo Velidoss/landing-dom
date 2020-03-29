@@ -28,6 +28,7 @@
                         <li><a href="/user/domainreg">Register domain name</a></li>
                         <li><a href="/user/account">Account</a></li>
                         <li><a href="/posts/postlist">Posts</a></li>
+                        <li><a href="/main/contact">Contact us</a></li>
                         <li>
                             <form action="/user/logout" method="POST">
                                 <button class="logout-btn" name="logout-submit" type="submit">
@@ -37,6 +38,7 @@
                         </li>
                     <?php } else {; ?>
                         <li><a href="/">Home</a></li>
+                        <li><a href="/main/contact">Contact us</a></li>
                         <li><a href="/user/register">Signup</a></li>
                         <li><a href="/user/login">Login</a></li>
                     <?php } ?>
@@ -58,6 +60,7 @@
                 <li><a href="/user/domainreg">Register domain name</a></li>
                 <li><a href="/user/account">Account</a></li>
                 <li><a href="/posts/postlist">Posts</a></li>
+                <li><a href="/main/contact">Contact us</a></li>
                 <li>
                     <form action="/user/logout" method="POST">
                         <button class="logout-btn" name="logout-submit" type="submit">
@@ -67,6 +70,7 @@
                 </li>
             <?php } else {; ?>
                 <li><a href="/">Home</a></li>
+                <li><a href="/main/contact">Contact us</a></li>
                 <li><a href="/user/register">Signup</a></li>
                 <li><a href="/user/login">Login</a></li>
             <?php } ?>

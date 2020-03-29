@@ -962,14 +962,17 @@ body {
             &-goto{
                 color: #2d3950;
                 justify-self: flex-end;
-                margin-left: 10px;
+                
                 img{
                     width: 15px;
                     height: 15px;
                     &:last-child{
-                        margin-left: 30px;
+                        margin-left: 15px;
                     }
                 }
+            }
+            &-comment{
+                margin-left: 15px;
             }
             &-comment_btn{
                 border: none;
@@ -984,7 +987,6 @@ body {
                 button{
                     border:none;
                     background: none;
-                    margin-left: 30px;
                     padding: 10px;
                     border-radius: 50%;
                     &:hover{
@@ -995,6 +997,16 @@ body {
                         height: 15px;
                     }
                 }
+            }
+            &-like{
+                margin-left: 30px;
+            }
+            &-dislike{
+                margin-left: 15px;
+            }
+            &-likecount{
+                font-size: 18px;
+                margin-left: 15px;
             }
         }
         &-comments{

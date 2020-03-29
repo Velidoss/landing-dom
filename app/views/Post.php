@@ -23,13 +23,16 @@
                 <form class="section-postlist__post-actions-like" action="/posts/postlike/<?php echo $data['post']['postId'] ?>" method="post">
                     <button type="submit" name="like-btn"><img src="/img/svg/thumbs-up-solid.svg" alt=""></button>
                 </form>
-                <form class="section-postlist__post-actions-dislike" action="/posts/postlike/<?php echo $data['post']['postId'] ?>" method="post">
+                <div class="section-postlist__post-actions-likecount">
+                    <?php echo $data['post']['likecount'] ?>
+                </div>
+                <form class="section-postlist__post-actions-dislike" action="/posts/postdislike/<?php echo $data['post']['postId'] ?>" method="post">
                     <button type="submit" name="dislike-btn"><img src="/img/svg/thumbs-down-solid.svg" alt=""></button>
                 </form>
             </div>
             <div class="section-postlist__post-comments">
-                <?php 
-                    if(isset($data['comments'])):
+                <?php
+                    if (isset($data['comments'])):
                         foreach ($data['comments'] as $comment): ?>
                             <div class="section-postlist__post-comments-comment">
                                 <div class="comment_author_img"><img src="<?php echo $comment['commentAuthorImg'] ?>" alt=""></div>

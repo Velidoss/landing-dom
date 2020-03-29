@@ -6,7 +6,7 @@ class ModelPosts extends Dbh
 {
     public function showPostlist()
     {
-        $sql = "SELECT * from posts order by postDateTime DESC ;";
+        $sql = 'SELECT * from posts order by postDateTime DESC ;';
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();
@@ -15,72 +15,96 @@ class ModelPosts extends Dbh
 
     public function showPost($postId)
     {
-        $sql = "SELECT * from posts where postId=? ;";
+        $sql = 'SELECT * from posts where postId=? ;';
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$postId]);
         $result = $stmt->fetch();
         return $result;
     }
 
-    public function createPost($postTitle,  $postText, $postDateTime, $postCategory, $postAuthor, $postAuthorId,
-                               $postImg ){
-        $sql = "INSERT INTO posts (postTitle, postContent , postDateTime , postCategory , postAuthor , postAuthorId, postimg ) VALUES (?,?,?,?,?,?,?);";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([$postTitle, $postText, $postDateTime, $postCategory, $postAuthor, $postAuthorId,$postImg]);
+    public function createPost($params = [])
+    {
+        $sql = 'INSERT INTO posts (postTitle, postContent , postDateTime , postCategory , postAuthor , postAuthorId, postimg ) VALUES (:postTitle, :postContent , :postDateTime , :postCategory , :postAuthor , :postAuthorId, :postimg);';
+        $this->query($sql, $params);
     }
-    public function findPost($query){
+
+    public function findPost($query)
+    {
         $sql = "SELECT postAuthor, postDateTime, postTitle, postContent FROM posts WHERE postAuthor like '%$query%' or postTitle like '%$query%' or postContent like '%$query%';";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$query]);
         $result = $stmt->fetchAll();
-       
-        if($result) {
+
+        if ($result) {
             return $result;
-        }else{
+        } else {
             return null;
         }
     }
 
-    public function makeComment($commentAuthor , $commentText , $commentPost , $commentDate , $commnetAuthorName)
+    public function makeComment($params = [])
     {
-        $sql = "INSERT INTO comments ( commentAuthor , commentText , commentToPost, commentDate, commentAuthorName) VALUES (?,?,?,?,?);";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([$commentAuthor , $commentText , $commentPost, $commentDate , $commnetAuthorName ]);
+        $sql = 'INSERT INTO comments(commentAuthor, commentText, commentToPost, commentDate, commentAuthorName ) VALUES ( :commentAuthor, :commentText, :commentToPost, :commentDate, :commentAuthorName);';
+        $this->query($sql, $params);
     }
 
     public function showComments($postId)
     {
-        $sql = "SELECT commentAuthor , commentText , commentToPost, commentDate , commentAuthorName FROM comments WHERE commentToPost=?;";
+        $sql = 'SELECT commentAuthor , commentText , commentToPost, commentDate , commentAuthorName FROM comments WHERE commentToPost=?;';
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$postId]);
 
         $result = $stmt->fetchAll();
 
-        if($result){
+        if ($result) {
             return $result;
         }
     }
 
-    public function makeLike($postId, $userId)
+    public function makeLike($params = [])
     {
-        $sql = "INSERT INTO postlikes( postId , likeFrom ) VALUES (?,?);";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([$postId, $userId]);
+        $sql = 'INSERT INTO postlikes( postId , likeFrom ) VALUES (:postId , :From);';
+        $this->query($sql, $params);
     }
 
-    public function checkLike($userId)
+    public function deleteLike($params = [])
     {
-        $sql = "SELECT postId , likeFrom FROM postlikes WHERE likeFrom=?";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([$userId]);
-        $result = $stmt->fetchAll();
-        file_put_contents('content1.json' , $result);
-        if(!isset($result)){
-            return true;
-        }else{
-            return false;
-        }
+        $sql = 'DELETE FROM postlikes WHERE postId=:postId AND likeFrom=:From';
+        $this->query($sql, $params);
     }
 
- 
+    public function makeDisLike($params = [])
+    {
+        $sql = 'INSERT INTO postdislikes( postId , disLikeFrom ) VALUES (:postId , :From);';
+        $this->query($sql, $params);
+    }
+
+    public function deleteDisLike($params = [])
+    {
+        $sql = 'DELETE FROM postdislikes WHERE postId=:postId AND disLikeFrom=:From';
+        $this->query($sql, $params);
+    }
+
+    public function checkLike($params = [])
+    {
+        $sql = 'SELECT postId , likeFrom FROM postlikes WHERE postId=:postId AND likeFrom=:From';
+        $result = $this->getRow($sql, $params);
+        return $result;
+    }
+
+    public function checkDisLike($params = [])
+    {
+        $sql = 'SELECT postId , disLikeFrom FROM postdislikes WHERE postId=:postId AND disLikeFrom=:From';
+        $result = $this->getRow($sql, $params);
+        return $result;
+    }
+
+    public function showLikes($params = [])
+    {
+        $sql = 'SELECT COUNT(postId) FROM postlikes WHERE postId=:postId';
+        $totalLikes = $this->getRow($sql, $params)[0]['COUNT(postId)'];
+        $sql = 'SELECT COUNT(postId) FROM postdislikes WHERE postId=:postId';
+        $totalDisLikes = $this->getRow($sql, $params)[0]['COUNT(postId)'];
+        return $totalLikes-$totalDisLikes;
+    }
 }
