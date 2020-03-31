@@ -21,7 +21,7 @@
             <div class="section-header__top-logo">
                 <a href="/">
                     <img src="/img/Blue Top.png" alt="img-logo" />
-                    <h1>Strict</h1>
+                    <h1>YURETZ</h1>
                 </a>
             </div>
             <nav class="section-header__top-nav">

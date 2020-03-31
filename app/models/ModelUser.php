@@ -4,57 +4,52 @@ require_once 'app/core/Dbh.php';
 
 class ModelUser extends Dbh{
 
-    public function registerUser($username, $email, $password )
+    public function registerUser($data)
     {
        
-        $sql = "SELECT uidUsers FROM users WHERE uidUsers=?";
-        $stmt = $this->db->prepare($sql);   
-        $stmt->bindParam(1, $username ); 
-        $stmt->execute();
-        $result = $stmt->fetch();
+        $sql = "SELECT uidUsers FROM users WHERE uidUsers=:username";
+        $usercheck = [
+            'username' => $data['username']
+        ];
+        $result = $this->getRow($sql, $usercheck);
         if ($result){
             
             die("Пользователь с таким именем уже существует");
         }
         else{
-            $sql = "INSERT INTO users (uidUsers , emailUsers, pwdUsers) VALUES (?, ?, ?);";
-            $stmt = $this->db->prepare($sql);
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            $stmt->execute([$username, $email, $hashedPassword]);
+            $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
+            $data['password'] = $hashedPassword;
+            $sql = "INSERT INTO users (uidUsers , emailUsers, pwdUsers) VALUES (:username, :email, :password);";
+            $this->query($sql, $data);
 
-            $sql = "SELECT idUsers FROM users WHERE uidUsers=? ";
-            $stmt = $this->db->prepare($sql);   
-            $stmt->bindParam(1, $username ); 
-            $stmt->execute();
-            $result = $stmt->fetch();
-            
-            $sql = "INSERT INTO userdata(userId, picStatus) VALUES (?,?)";
-            $stmt = $this->db->prepare($sql);
-            $stmt->execute([$result['idUsers'], 0]);
+            $new_user = $this->db->lastInsertId();
+            $userdata_params = [
+                'userId' => $new_user,
+                'status' => 0
+            ];
+            $sql = "INSERT INTO userdata(userId, picStatus) VALUES (:userId, :status)";
+            $this->query($sql, $userdata_params);
         }
 
 
     }
-    public function loginUser($username, $password ){
-        $sql = "SELECT * FROM users WHERE uidUsers=?;";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(1, $username );
-        $stmt->execute();
-        $user = $stmt->fetch();
+    public function loginUser($data){
+        $sql = "SELECT * FROM users WHERE uidUsers=:username;";
+        $user = $this->getRow($sql, ['username'=>$data['username']])[0];
         if($user){
-
-            if(password_verify($password, $user['pwdUsers'])){
+            if(password_verify($data['password'], $user['pwdUsers'])){
                 $_SESSION['userId'] = $user['idUsers'];
                 $_SESSION['userUid'] = $user['uidUsers'];
                 $_SESSION['count'] = 0;
                 session_start();
                 header('Location: /user/account');
-                
                 exit();
             }else{
-                header("Location:/");
-                exit();
-            }
+                die('wrongpwd');
+                header("Location:/"); 
+                }
+            }else{
+            die('wrongUserdb');
         }
     }
 
@@ -146,80 +141,61 @@ class ModelUser extends Dbh{
         
     }
 
-    public function domainRegister($domainRegistrarId, $domainTimeReg, $domainName, $domainZone){
-        $sql = "SELECT domainName FROM domains WHERE domainName=?;";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(1, $domainName);
-        $stmt->execute();
-        
-        $domainCheck = $stmt->fetch();
+    public function domainRegister($data){
+        $sql = "SELECT domainName FROM domains WHERE domainName=:domainName AND domainZone=:domainZone;";        
+        $domainCheck = $this->getColumn($sql, ['domainName'=>$data['domainName'], 'domainZone'=>$data['domainZone']]);
+        file_put_contents('contenct_check.json', json_encode([$domainCheck, $data]));
         if($domainCheck){
             header("Location: ../user/domainreg");
             echo 'Это доменное имя уже зарегистрировано!';
             exit();
         }else{
-            $sql = "INSERT into domains (domainRegistrantId, domainName, domainZone, domainTimeReg) VALUES (?,?,?,?);";
-            $stmt= $this->db->prepare($sql);
-            $stmt->execute([$domainRegistrarId, $domainName, $domainZone,  $domainTimeReg]);
+            $sql = "INSERT into domains (domainRegistrantId, domainName, domainZone, domainTimeReg) VALUES (:domainRegistrarId, :domainName, :domainZone, :domainTimeReg);";
+            $this->query($sql, $data);
             header("Location: ../user/domainreg");
             echo 'Доменное имя успешно зарегистрировано!';
             exit();
         }
     }
 
-    public function changeUserName($newName, $userId ){
-        $sql = "UPDATE userdata SET userName =? WHERE userid=?;";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([$newName, $userId]);
+    public function changeUserName($data ){
+        $sql = "UPDATE userdata SET userName =:newName WHERE userid=:userId;";
+        $this->query($sql, $data);
     }
 
-    public function changeUserBrthDate($newData, $userId ){
-        $sql = "UPDATE userdata SET userBrthDate =? WHERE userid=?;";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([$newData, $userId]);
+    public function changeUserBrthDate($data ){
+        $sql = "UPDATE userdata SET userBrthDate =:newData WHERE userid=:userId;";
+        $this->query($sql, $data);
     }
 
-    public function changeUserInfo($newData, $userId ){
-        $sql = "UPDATE userdata SET userInfo =? WHERE userid=?;";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([$newData, $userId]);
+    public function changeUserInfo($data ){
+        $sql = "UPDATE userdata SET userInfo =:newData WHERE userid=:userId;";
+        $this->query($sql, $data);
     }
 
-    public function selectUserData($userId){
-        $sql = "SELECT * FROM userdata WHERE userId=?";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(1, $userId);
-        $stmt->execute([$userId]);
-        $result = $stmt->fetchAll();
+    public function selectUserData($data){
+        $sql = "SELECT * FROM userdata WHERE userId=:userId";
+        $result = $this->getRow($sql, $data);
         return $result;
     }
 
 
-    public function selectDomains($userId){
-        $sql = "SELECT domainName, domainZone FROM domains WHERE domainRegistrantId=?";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(1, $userId);
-        $stmt->execute([$userId]);
-        $result = $stmt->fetchAll();
+    public function selectDomains($data){
+        $sql = "SELECT domainName, domainZone FROM domains WHERE domainRegistrantId=:userId";
+        $result = $this->getRow($sql, $data);
         return $result;
     }
 
-    public function selectUserPosts($userUid){
-        $sql = "SELECT * FROM posts WHERE postAuthor=?";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(1, $userUid);
-        $stmt->execute([$userUid]);
-        $result = $stmt->fetchAll();
+    public function selectUserPosts($data){
+        $sql = "SELECT * FROM posts WHERE postAuthor=:userUid";
+        $result = $this->getRow($sql, $data);
         return $result;
     }
 
-    public function selectUserComments($userId)
+    public function selectUserComments($data)
     {
         $sql = "SELECT * FROM comments WHERE commentAuthor=:userId";
-        $params = [
-            'userId'=>$userId
-        ];
-        $result = $this->getRow($sql, $params);
+        $result = $this->getRow($sql, $data);
         return $result;
     }
     public function setImg($file){
@@ -229,10 +205,8 @@ class ModelUser extends Dbh{
             if(in_array($file["new-image"]["type"] , $allowed_types)){
                 if($file["new-image"]["tmp_name"]){
                     move_uploaded_file($file["new-image"]["tmp_name"], $uploadDir.$_SESSION['userId'].".jpg" );
-                    $sql = "UPDATE userdata SET picStatus =1 WHERE userid=:sessionId;";
-                    $stmt = $this->db->prepare($sql);
-                    $stmt->bindValue(':sessionId',$_SESSION['userId'] );
-                    $stmt->execute();
+                    $sql = "UPDATE userdata SET picStatus =:status WHERE userid=:userId;";
+                    $this->query($sql, ['status'=>1, 'userId'=>$_SESSION['userId']]);
                     return true;
                 }else{
                     return false;
@@ -244,28 +218,23 @@ class ModelUser extends Dbh{
             return false;
         }
     }
-    public function unsetImg($id){
-        if($this->checkImg($id)){
+    public function unsetImg($data){
+        if($this->checkImg($data['userId'])){
             $uploadDir = "img/userimage/";
             unlink($uploadDir.$_SESSION['userId'].".jpg");
-            $sql = "UPDATE userdata SET picStatus = 0 WHERE userId=:sessionId;";
-            $stmt = $this->db->prepare($sql);
-            $stmt->bindValue(':sessionId',$_SESSION['userId'] );
-            $stmt->execute();
+            $sql = "UPDATE userdata SET picStatus = :status WHERE userId=:userId;";
+            $this->query($sql, ['status'=>0, 'userId'=>$_SESSION['userId']]);
             return true;
         }else{
             return false;
-        }
+        } 
 
     }
 
-    public function checkImg($id){
+    public function checkImg($data){
         $sql = "SELECT picStatus FROM userdata WHERE userId=:Id; ";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':Id',$id );
-        $stmt->execute();
-        $result = $stmt->fetch();
-        if ($result['picStatus'] == 1){
+        $result = $this->getColumn($sql, $data);
+        if ($result == 1){
             return true;
         }else{
             return false;

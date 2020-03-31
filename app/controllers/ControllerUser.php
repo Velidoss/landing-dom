@@ -38,11 +38,11 @@ class ControllerUser extends Controller
         if(isset($_SESSION['userId'])){
             $postModel = new ModelPosts;
             $data=[];
-            $data['domains'] = $this->model->selectDomains($_SESSION['userId']);
-            $data['userData'] = $this->model->selectUserData($_SESSION['userId']);
-            $data['userPosts'] = $this->model->selectUserPosts($_SESSION['userUid']);
-            $data['userComments'] = $this->model->selectUserComments($_SESSION['userId']);
-
+            $data['domains'] = $this->model->selectDomains(['userId'=>$_SESSION['userId']]);
+            $data['userData'] = $this->model->selectUserData(['userId'=>$_SESSION['userId']]);
+            $data['userPosts'] = $this->model->selectUserPosts(['userUid'=>$_SESSION['userUid']]);
+            $data['userComments'] = $this->model->selectUserComments(['userId'=>$_SESSION['userId']]);
+            
             for($i=0; $i<count($data['userPosts']); $i++){
                 $data['userPosts'][$i]['postlikes'] = $postModel->showLikes(['postId'=>$data['userPosts'][$i]['postAuthor']]);
             }
@@ -50,7 +50,7 @@ class ControllerUser extends Controller
                 $data['userComments'][$i]['commentlikes'] = $postModel->showLikes(['postId'=>$data['userComments'][$i]['fromUser']]);
             }
 
-            if($this->model->checkImg($_SESSION['userId'])){
+            if($this->model->checkImg(['Id'=>$_SESSION['userId']])){
                 $data['userImg'] = $_SESSION['userId'].".jpg";
             }else{
                 $data['userImg'] = "anon.png";
@@ -71,6 +71,7 @@ class ControllerUser extends Controller
             $email = trim($_POST['email']);
             $password = trim($_POST['pwd']);
             $passwordRepeat = trim($_POST['pwd-repeat']);
+            
             if(empty($username) || empty($email) || empty($password) || empty($passwordRepeat)){
                 die("Заполните все поля.") ;
             }
@@ -84,7 +85,13 @@ class ControllerUser extends Controller
                 
                 die("Пароли не совпадают.") ;
             }else{
-                $this->model->registerUser($username,$email ,$password );
+                
+                $data = [
+                    'username' => trim($_POST['username']),
+                    'email' => trim($_POST['email']),
+                    'password' => trim($_POST['pwd'])
+                ];
+                $this->model->registerUser($data );
             }
             
         }
@@ -98,7 +105,11 @@ class ControllerUser extends Controller
             if(empty($username) || empty($password)){
                 die("Для входа введите логин и пароль.") ;
             }else{
-                $this->model->loginUser($username,$password );
+                $data = [
+                    'username'=>$username,
+                    'password'=>$password
+                ];
+                $this->model->loginUser($data);
             }
         }
     }
@@ -151,11 +162,14 @@ class ControllerUser extends Controller
                                 header("Location: ../user/domainreg?error=domainnamewrongsign");
                                 exit();
                             }else{
-                                $domainRegistrarId = $_SESSION['userId'];
-                                $domainTimeReg = date("Y-m-d H:i:s");
-                                $domainName = $domainNameExp[0];
-                                $domainZone = $domainNameExp[1].".".$domainNameExp[2];
-                                $this->model->domainRegister($domainRegistrarId,$domainTimeReg , $domainName ,$domainZone);
+                                $data=[                                
+                                    'domainRegistrarId' => $_SESSION['userId'],
+                                    'domainTimeReg' => date("Y-m-d H:i:s"),
+                                    'domainName' => $domainNameExp[0],
+                                    'domainZone' => $domainNameExp[1].".".$domainNameExp[2]
+                                ];
+
+                                $this->model->domainRegister($data);
                             }
                         }
                     }
@@ -179,11 +193,13 @@ class ControllerUser extends Controller
                                 }else{
                                     
                                     //Кладем в базу.
-                                    $domainRegistrarId = $_SESSION['userId'];
-                                    $domainTimeReg = date("Y-m-d H:i:s");
-                                    $domainName = $domainNameExp[0];
-                                    $domainZone = $domainNameExp[1];
-                                    $this->model->domainRegister($domainRegistrarId,$domainTimeReg , $domainName ,$domainZone);
+                                    $data=[                                
+                                        'domainRegistrarId' => $_SESSION['userId'],
+                                        'domainTimeReg' => date("Y-m-d H:i:s"),
+                                        'domainName' => $domainNameExp[0],
+                                        'domainZone' => $domainNameExp[1]
+                                    ];
+                                    $this->model->domainRegister($data);
                                 }
                             }
                         }
@@ -206,7 +222,11 @@ class ControllerUser extends Controller
                 exit();
             }
             else{
-                $this->model->changeUserName($newName, $userId );
+                $data = [
+                    'newName' => $newName,
+                    'userId' =>$userId,
+                ];
+                $this->model->changeUserName($data );
                 $this->view->redirect('/user/account');
             }
         }else{
@@ -228,7 +248,11 @@ class ControllerUser extends Controller
                 exit();
             }
             else{
-                $this->model->changeUserBrthDate($newData, $userId );
+                $data = [
+                    'newData' => $newData,
+                    'userId' =>$userId,
+                ];
+                $this->model->changeUserBrthDate($data );
                 $this->view->redirect('/user/account');
             }
         }else{
@@ -254,7 +278,11 @@ class ControllerUser extends Controller
                 exit();
             }
             else{
-                $this->model->changeUserInfo($newData, $userId );
+                $data = [
+                    'newData' => $newData,
+                    'userId' =>$userId,
+                ];
+                $this->model->changeUserInfo($data );
                 $this->view->redirect('/user/account');
             }
         }else{
@@ -301,7 +329,7 @@ class ControllerUser extends Controller
     public function actionChangeImg(){
         if (isset($_POST['changeimg-submit'])){
             if(empty($_FILES["new-image"]["tmp_name"])){
-                $this->model->unsetImg($_SESSION['userId']);
+                $this->model->unsetImg(['status'=>0, 'userId'=>$_SESSION['userId']]);
                 $this->view->redirect('/user/account');
                 exit();
             }else{

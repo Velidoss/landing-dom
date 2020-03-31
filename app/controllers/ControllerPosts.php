@@ -21,7 +21,7 @@ class Controllerposts extends Controller
             $data['posts'] = $this->model->showPostlist();
             for ($i = 0; $i < count($data['posts']); $i++) {
                 $data['posts'][$i]['postLikeCount'] = $this->model->showLikes(['postId' => $data['posts'][$i]['postId']]);
-                if ($modelUser->checkImg($data['posts'][$i]['postAuthorId'])) {
+                if ($modelUser->checkImg(['Id'=>$data['posts'][$i]['postAuthorId']])) {
                     $data['posts'][$i]['userImg'] = '/img/userimage/' . $data['posts'][$i]['postAuthorId'] . '.jpg';
                 } else {
                     $data['posts'][$i]['userImg'] = '/img/userimage/anon.png';
@@ -41,7 +41,7 @@ class Controllerposts extends Controller
             $data['post'] = $this->model->showPost($postId);
             $data['comments'] = $this->model->showComments($postId);
             $data['post']['likecount'] = $this->model->showLikes(['postId' => $postId]);
-            if ($modelUser->checkImg($data['post']['postAuthorId'])) {
+            if ($modelUser->checkImg(['Id'=>$data['post']['postAuthorId']])) {
                 $data['post']['userImg'] = '/img/userimage/' . $data['post']['postAuthorId'] . '.jpg';
             } else {
                 $data['post']['userImg'] = '/img/userimage/anon.png';
@@ -49,7 +49,7 @@ class Controllerposts extends Controller
             if (isset($data['comments'])) {
                 for ($i = 0; $i < count($data['comments']); $i++) {
                     $data['comments'][$i]['commentLikeCount'] = $this->model->showCommentLikes(['commentId'=>$data['comments'][$i]['commentId']]);
-                    if ($modelUser->checkImg($data['comments'][$i]['commentAuthor'])) {
+                    if ($modelUser->checkImg(['Id'=>$data['comments'][$i]['commentAuthor']])) {
                         $data['comments'][$i]['commentAuthorImg'] = '/img/userimage/' . $data['comments'][$i]['commentAuthor'] . '.jpg';
                     } else {
                         $data['comments'][$i]['commentAuthorImg'] = '/img/userimage/anon.png';
@@ -75,7 +75,7 @@ class Controllerposts extends Controller
                     'commentText' => $_POST['comment-text'],
                     'commentDate' => date('Y-m-d H:i:s'),
                     'commentToPost' => $postId,
-                    'commentAuthorName' => $modelUser->selectUserData($_SESSION['userId'])[0]['userName'],
+                    'commentAuthorName' => $modelUser->selectUserData(['userId'=>$_SESSION['userId']])[0]['userName'],
                 ];
                 $this->model->makeComment($params);
                 $this->view->redirect('/posts/post/' . $postId);
