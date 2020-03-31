@@ -48,6 +48,7 @@ class Controllerposts extends Controller
             }
             if (isset($data['comments'])) {
                 for ($i = 0; $i < count($data['comments']); $i++) {
+                    $data['comments'][$i]['commentLikeCount'] = $this->model->showCommentLikes(['commentId'=>$data['comments'][$i]['commentId']]);
                     if ($modelUser->checkImg($data['comments'][$i]['commentAuthor'])) {
                         $data['comments'][$i]['commentAuthorImg'] = '/img/userimage/' . $data['comments'][$i]['commentAuthor'] . '.jpg';
                     } else {
@@ -125,6 +126,7 @@ class Controllerposts extends Controller
                 header('Location:/posts/makepost?emptyfields');
                 exit();
             } else {
+                file_put_contents('check_file.json', json_encode($_FILES));
                 $params = [
                     'postTitle' => htmlspecialchars($_POST['posttile']),
                     'postContent' => htmlspecialchars($_POST['posttext']),
@@ -132,10 +134,9 @@ class Controllerposts extends Controller
                     'postDateTime' => date('Y-m-d H:i:s'),
                     'postAuthor' => $_SESSION['userUid'],
                     'postAuthorId' => $_SESSION['userId'],
-                    'postimg' => $_FILES['post-img']['tmp_name'],
                 ];
-
-                $this->model->createPost($params);
+                $file = $_FILES;
+                $this->model->createPost($params, $file);
                 $this->view->redirect('/posts/postlist');
             }
         }
@@ -177,5 +178,41 @@ class Controllerposts extends Controller
             $this->model->deleteDisLike($params);
         };
         $this->view->redirect('/posts/post/' . $postId);
+    }
+    public function actionCommentlike($commentId)
+    {
+        $likeFrom = $_SESSION['userId'];
+        $params = [
+            'commentId' => $commentId,
+            'fromUser' => $likeFrom,
+        ];
+        $checkLike = $this->model->checkCommentLike($params);
+        $checkDisLike = $this->model->checkCommentDisLike($params);
+        if (empty($checkLike) and empty($checkDisLike)) {
+            $this->model->makeCommentLike($params);
+        }elseif(!empty($checkLike)) {
+            $this->model->deleteCommentLike($params);
+        }elseif(!empty( $checkDisLike)){
+            $this->model->deleteCommentDisLike($params);
+        };
+        $this->view->redirect('/posts/postlist');
+    }
+    public function actionCommentDislike($commentId)
+    {
+        $likeFrom = $_SESSION['userId'];
+        $params = [
+            'commentId' => $commentId,
+            'fromUser' => $likeFrom,
+        ];
+        $checkLike = $this->model->checkCommentLike($params);
+        $checkDisLike = $this->model->checkCommentDisLike($params);
+        if (empty($checkLike) and empty($checkDisLike)) {
+            $this->model->makeCommentLike($params);
+        }elseif(!empty($checkLike)) {
+            $this->model->deleteCommentLike($params);
+        }elseif(!empty( $checkDisLike)){
+            $this->model->deleteCommentDisLike($params);
+        };
+        $this->view->redirect('/posts/postlist');
     }
 }

@@ -10,6 +10,9 @@
             </div>
             <div class="section-postlist__post-content">
                 <div class="section-postlist__post-content-title"><?php echo $data['post']['postTitle'] ?></div>
+                <div class="section-postlist__post-content-img">
+                    <img src="<?php echo $data['post']['postImg'] ?>" alt="">   
+                </div>
                 <div class="section-postlist__post-content-text">
                     <?php echo $data['post']['postContent'] ?>
                 </div>
@@ -35,11 +38,22 @@
                     if (isset($data['comments'])):
                         foreach ($data['comments'] as $comment): ?>
                             <div class="section-postlist__post-comments-comment">
-                                <div class="comment_author_img"><img src="<?php echo $comment['commentAuthorImg'] ?>" alt=""></div>
-                                <div class="comment_text"><?php echo $comment['commentText'] ?></div>
-                                <div class="comment_info">
-                                    <p class="comment_info-author"><?php echo $comment['commentAuthorName'] ?></p>
-                                    <p class="comment_info-date"><?php echo $comment['commentDate'] ?></p>
+                                <div class="comment__author-img"><img src="<?php echo $comment['commentAuthorImg'] ?>" alt=""></div>
+                                <div class="comment__text"><?php echo $comment['commentText'] ?></div>
+                                <div class="comment__info">
+                                    <p class="comment__info-author"><?php echo $comment['commentAuthorName'] ?></p>
+                                    <p class="comment__info-date"><?php echo $comment['commentDate'] ?></p>
+                                </div>
+                                <div class="comment__actions">
+                                    <form class="comment__actions-like" action="/posts/commentlike/<?php echo $comment['commentId'] ?>" method="post">
+                                        <button type="submit" name="like-btn"><img src="/img/svg/thumbs-up-solid.svg" alt=""></button>
+                                    </form>
+                                    <div class="comment__actions-likecount">
+                                        <?php echo $comment['commentLikeCount'] ?>
+                                    </div>
+                                    <form class="comment__actions-dislike" action="/posts/commentdislike/<?php echo $comment['commentId'] ?>" method="post">
+                                            <button type="submit" name="dislike-btn"><img src="/img/svg/thumbs-down-solid.svg" alt=""></button>
+                                    </form>
                                 </div>
                             </div>
                         <?php endforeach ;

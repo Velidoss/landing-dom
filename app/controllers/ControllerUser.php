@@ -1,7 +1,7 @@
 <?php
 
 require_once 'app/models/ModelUser.php';
-
+require_once 'app/models/ModelPosts.php';
 use app\core\View;
 
 class ControllerUser extends Controller
@@ -36,10 +36,20 @@ class ControllerUser extends Controller
     public function actionAccount()
     {
         if(isset($_SESSION['userId'])){
+            $postModel = new ModelPosts;
             $data=[];
             $data['domains'] = $this->model->selectDomains($_SESSION['userId']);
             $data['userData'] = $this->model->selectUserData($_SESSION['userId']);
             $data['userPosts'] = $this->model->selectUserPosts($_SESSION['userUid']);
+            $data['userComments'] = $this->model->selectUserComments($_SESSION['userId']);
+
+            for($i=0; $i<count($data['userPosts']); $i++){
+                $data['userPosts'][$i]['postlikes'] = $postModel->showLikes(['postId'=>$data['userPosts'][$i]['postAuthor']]);
+            }
+            for($i=0; $i<count($data['userComments']); $i++){
+                $data['userComments'][$i]['commentlikes'] = $postModel->showLikes(['postId'=>$data['userComments'][$i]['fromUser']]);
+            }
+
             if($this->model->checkImg($_SESSION['userId'])){
                 $data['userImg'] = $_SESSION['userId'].".jpg";
             }else{
@@ -57,7 +67,6 @@ class ControllerUser extends Controller
 
     public function actionRegisterUser(){
         if (isset($_POST['register-submit'])){
-            
             $username = trim($_POST['username']);
             $email = trim($_POST['email']);
             $password = trim($_POST['pwd']);

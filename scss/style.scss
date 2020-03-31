@@ -854,8 +854,6 @@ body {
             }
             &-posts{
                 display: flex;
-                
-                    
                 flex-direction: column;
                 max-width: 550px ;
                 .tab-item {
@@ -866,28 +864,62 @@ body {
                     }
                     p {
                         &:last-child{
-                            border-top: 1px solid #999999;
+                            
                             border-bottom: 1px solid #999999;
                         } 
                     }
-                    .post-title{
+                    .post{
+                        &-title{
                         font-size: 17px;
                         color: #e7e7e7;
-                    }
-                    .post-category{
+                        }
+                        &-category{
                         font-size: 15px;
                         color: #e7e5e5; 
-                    }
-                    .post-content{
+                            a{
+                                color: #fff;
+                                text-shadow: 1px 1px grey;
+                            }
+                        }
+                        &-content{
                         font-size: 15px;
                         color: #999999; 
+                        }
+                        &-likes{
+                            font-size: 15px;
+                            color: #dddddd; 
+                        }
                     }
                 }
             }
+            &-comments{
+                margin-left: 50px;
+                .tab-item{
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                    margin-bottom: 10px;
+                    border-bottom: 1px solid #fff;
+                    .comment{
+                        &-text{
+                            color: #fff;
+                            a{
+                            color: #fff;
+                            text-shadow: 1px 1px grey;
+                            }  
+                        }
 
+                        &-date{
+                        color: #bebebe;
+                        }         
 
+                        &-likes{
+                        font-size: 15px;
+                        color: #dddddd; 
+                        }
+                    }
+                }
+            }
         }
-
     }
 }
 
@@ -1011,12 +1043,51 @@ body {
         }
         &-comments{
             &-comment{
-                .comment_author_img{
-                    img{
-                        width: 50px;
-                        height: 50px;
-                        border-radius: 50%;
+                .comment{
+                    &__author-img{
+                        img{
+                            width: 50px;
+                            height: 50px;
+                            border-radius: 50%;
+                        }
                     }
+                    &__text{
+
+                    }
+                    &__info{
+                        &-author{
+
+                        }
+                        &-date{
+
+                        }
+                    }
+                    &__actions{
+                        display: flex;
+                        align-items: center;
+                        &-like, &-dislike{
+                            button{
+                                border:none;
+                                background: none;
+                                padding: 10px;
+                                border-radius: 50%;
+                                &:hover{
+                                    background-color:#a6a6a6 ;
+                                }
+                                img{
+                                    width: 15px;
+                                    height: 15px;
+                                }
+                            }
+                        }
+                        &-likecount{
+                            margin-left: 15px;
+                        }
+                        &-dislike{
+                            margin-left: 15px;
+                        }
+                    }
+
                 }
             }
         }

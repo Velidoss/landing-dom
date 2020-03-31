@@ -1476,7 +1476,6 @@ body {
 }
 
 .section-account__userstatistics-tabcontent-posts .tab-item p:last-child {
-  border-top: 1px solid #999999;
   border-bottom: 1px solid #999999;
 }
 
@@ -1490,9 +1489,48 @@ body {
   color: #e7e5e5;
 }
 
+.section-account__userstatistics-tabcontent-posts .tab-item .post-category a {
+  color: #fff;
+  text-shadow: 1px 1px grey;
+}
+
 .section-account__userstatistics-tabcontent-posts .tab-item .post-content {
   font-size: 15px;
   color: #999999;
+}
+
+.section-account__userstatistics-tabcontent-posts .tab-item .post-likes {
+  font-size: 15px;
+  color: #dddddd;
+}
+
+.section-account__userstatistics-tabcontent-comments {
+  margin-left: 50px;
+}
+
+.section-account__userstatistics-tabcontent-comments .tab-item {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #fff;
+}
+
+.section-account__userstatistics-tabcontent-comments .tab-item .comment-text {
+  color: #fff;
+}
+
+.section-account__userstatistics-tabcontent-comments .tab-item .comment-text a {
+  color: #fff;
+  text-shadow: 1px 1px grey;
+}
+
+.section-account__userstatistics-tabcontent-comments .tab-item .comment-date {
+  color: #bebebe;
+}
+
+.section-account__userstatistics-tabcontent-comments .tab-item .comment-likes {
+  font-size: 15px;
+  color: #dddddd;
 }
 
 .section-postlist .section-posts-inner {
@@ -1642,10 +1680,43 @@ body {
   margin-left: 15px;
 }
 
-.section-postlist__post-comments-comment .comment_author_img img {
+.section-postlist__post-comments-comment .comment__author-img img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
+}
+
+.section-postlist__post-comments-comment .comment__actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.section-postlist__post-comments-comment .comment__actions-like button, .section-postlist__post-comments-comment .comment__actions-dislike button {
+  border: none;
+  background: none;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.section-postlist__post-comments-comment .comment__actions-like button:hover, .section-postlist__post-comments-comment .comment__actions-dislike button:hover {
+  background-color: #a6a6a6;
+}
+
+.section-postlist__post-comments-comment .comment__actions-like button img, .section-postlist__post-comments-comment .comment__actions-dislike button img {
+  width: 15px;
+  height: 15px;
+}
+
+.section-postlist__post-comments-comment .comment__actions-likecount {
+  margin-left: 15px;
+}
+
+.section-postlist__post-comments-comment .comment__actions-dislike {
+  margin-left: 15px;
 }
 
 .section-postmenu {

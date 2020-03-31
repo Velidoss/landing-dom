@@ -22,11 +22,32 @@ class ModelPosts extends Dbh
         return $result;
     }
 
-    public function createPost($params = [])
+    public function createPost($params = [], $file = null)
     {
-        $sql = 'INSERT INTO posts (postTitle, postContent , postDateTime , postCategory , postAuthor , postAuthorId, postimg ) VALUES (:postTitle, :postContent , :postDateTime , :postCategory , :postAuthor , :postAuthorId, :postimg);';
+        $sql = 'INSERT INTO posts (postTitle, postContent , postDateTime , postCategory , postAuthor , postAuthorId) VALUES (:postTitle, :postContent , :postDateTime , :postCategory , :postAuthor , :postAuthorId);';
         $this->query($sql, $params);
+        $postId = $this->db->lastInsertId();
+        file_put_contents('check_file.json', json_encode($file));
+        $allowed_types = ['image/jpg', 'image/png', 'image/jpeg'];
+        $uploadDir = "img/postimages/";
+        if($file["post-img"]["size"] < 5000000){
+            if(in_array($file["post-img"]["type"] , $allowed_types)){
+                if($file["post-img"]["tmp_name"]){
+                    move_uploaded_file($file["post-img"]["tmp_name"], $uploadDir.$postId.".jpg");
+                    $sql = "UPDATE posts SET postImg=:postImg WHERE postId=:lastInsertedId;";
+                    $this->query($sql, $params=['postImg'=>'/'.$uploadDir.$postId.".jpg", 'lastInsertedId'=>$postId]);
+                    return true;
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
     }
+    
 
     public function findPost($query)
     {
@@ -50,7 +71,7 @@ class ModelPosts extends Dbh
 
     public function showComments($postId)
     {
-        $sql = 'SELECT commentAuthor , commentText , commentToPost, commentDate , commentAuthorName FROM comments WHERE commentToPost=?;';
+        $sql = 'SELECT * FROM comments WHERE commentToPost=?;';
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$postId]);
 
@@ -105,6 +126,53 @@ class ModelPosts extends Dbh
         $totalLikes = $this->getRow($sql, $params)[0]['COUNT(postId)'];
         $sql = 'SELECT COUNT(postId) FROM postdislikes WHERE postId=:postId';
         $totalDisLikes = $this->getRow($sql, $params)[0]['COUNT(postId)'];
+        return $totalLikes-$totalDisLikes;
+    }
+
+    public function makeCommentLike($params = [])
+    {
+        $sql = 'INSERT INTO commentlikes( commentId , fromUser ) VALUES (:commentId , :fromUser);';
+        $this->query($sql, $params);
+    }
+
+    public function deleteCommentLike($params = [])
+    {
+        $sql = 'DELETE FROM commentlikes WHERE commentId=:commentId AND fromUser=:fromUser';
+        $this->query($sql, $params);
+    }
+
+    public function makeCommentDisLike($params = [])
+    {
+        $sql = 'INSERT INTO commentdislikes( commentId , fromUser ) VALUES (:commentId , :fromUser);';
+        $this->query($sql, $params);
+    }
+
+    public function deleteCommentDisLike($params = [])
+    {
+        $sql = 'DELETE FROM commentdislikes WHERE commentId=:commentId AND fromUser=:fromUser';
+        $this->query($sql, $params);
+    }
+
+    public function checkCommentLike($params = [])
+    {
+        $sql = 'SELECT commentId , fromUser FROM commentlikes WHERE commentId=:commentId AND fromUser=:fromUser';
+        $result = $this->getRow($sql, $params);
+        return $result;
+    }
+
+    public function checkCommentDisLike($params = [])
+    {
+        $sql = 'SELECT commentId , fromUser FROM commentdislikes WHERE commentId=:commentId AND fromUser=:fromUser';
+        $result = $this->getRow($sql, $params);
+        return $result;
+    }
+
+    public function showCommentLikes($params = [])
+    {
+        $sql = 'SELECT COUNT(commentId) FROM commentlikes WHERE commentId=:commentId';
+        $totalLikes = $this->getRow($sql, $params)[0]['COUNT(commentId)'];
+        $sql = 'SELECT COUNT(commentId) FROM commentdislikes WHERE commentId=:commentId';
+        $totalDisLikes = $this->getRow($sql, $params)[0]['COUNT(commentId)'];
         return $totalLikes-$totalDisLikes;
     }
 }

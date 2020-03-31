@@ -205,11 +205,21 @@ class ModelUser extends Dbh{
     }
 
     public function selectUserPosts($userUid){
-        $sql = "SELECT postTitle, postCategory, postContent, postDateTime FROM posts WHERE postAuthor=?";
+        $sql = "SELECT * FROM posts WHERE postAuthor=?";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(1, $userUid);
         $stmt->execute([$userUid]);
         $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    public function selectUserComments($userId)
+    {
+        $sql = "SELECT * FROM comments WHERE commentAuthor=:userId";
+        $params = [
+            'userId'=>$userId
+        ];
+        $result = $this->getRow($sql, $params);
         return $result;
     }
     public function setImg($file){

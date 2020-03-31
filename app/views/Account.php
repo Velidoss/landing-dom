@@ -52,6 +52,7 @@
     </div>
     <div class="section-account__userstatistics">
       <div class="section-account__userstatistics-tabs">
+        
         <button onclick="openUserStat('domains')" class="section-account__userstatistics-tabs-tablink" id="defaultOpen">
           My domains
         </button>
@@ -77,14 +78,26 @@
           
             <div class="tab-item">
               <p class="post-title"><?php echo $post['postTitle'] ?></p>
-              <p class="post-category"><?php echo 'Category:'.$post['postCategory'].' .Posted on: '.$post['postDateTime'] ?></p>
+              <p class="post-category"><?php echo 'Category:'.$post['postCategory'].' .Posted on: '.$post['postDateTime'] ?><a href="/posts/post/<?php echo $post['postId'] ?>">Go to post</a> </p>
               <p class="post-content"><?php echo $post['postContent'] ?></p>
+              <p class="post-likes">Likes: <?php echo $post['postlikes'] ?></p>
             </div>
           
         <?php endforeach ?>
         </div>
       </div>
-      <div class="section-account__userstatistics-tabcontent" id="comments"></div>
+      <div class="section-account__userstatistics-tabcontent" id="comments">
+      <div class="section-account__userstatistics-tabcontent-comments">
+        <?php foreach ($data['userComments'] as $key => $comment): ?>
+            <div class="tab-item">
+              <p class="comment-text"><?php echo $comment['commentText'] ?> <a href="/posts/post/<?php echo $comment['commentToPost'] ?>">Go to post</a></p>
+              <p class="comment-date"><?php echo $comment['commentDate'] ?></p>
+              <p class="comment-likes">Likes: <?php echo $comment['commentlikes'] ?></p>
+            </div>
+          
+        <?php endforeach ?>
+        </div>
+      </div>
     </div>
   </div>
 </div>
