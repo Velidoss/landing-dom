@@ -1,5 +1,7 @@
 <?php
 
+namespace app\core;
+
 use app\core\View;
 
 class Controller

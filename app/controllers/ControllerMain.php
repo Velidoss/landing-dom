@@ -1,5 +1,6 @@
 <?php
 
+use app\core\Controller;
 class ControllerMain extends Controller
 {
     public function actionIndex()

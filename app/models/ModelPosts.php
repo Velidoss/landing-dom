@@ -1,16 +1,46 @@
 <?php
 
+namespace app\models;
+
+use app\core\Dbh;
+
 require_once 'app/core/Dbh.php';
 
 class ModelPosts extends Dbh
 {
-    public function showPostlist()
+    public function showPostlist($limit=[])
     {
-        $sql = 'SELECT * from posts order by postDateTime DESC ;';
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetchAll();
-        return $result;
+        if(empty($limit)){
+            $sql = 'SELECT * from posts order by postDateTime DESC ;';
+        }else{
+            $sql = 'SELECT * from posts order by postDateTime DESC LIMIT :start,:perpage';
+        }
+        
+        return $this->getRow($sql, $limit);
+    }
+
+    public function countPosts()
+    {
+        $sql = 'SELECT COUNT(postId) FROM posts';
+        return $this->getColumn($sql);
+    }
+
+    public function countComments()
+    {
+        $sql = 'SELECT COUNT(commentId) FROM comments';
+        return $this->getColumn($sql);
+    }
+
+    public function countAuthorPosts($data)
+    {
+        $sql = 'SELECT COUNT(postId) FROM posts where postAuthorId=:postAuthorId';
+        return $this->getColumn($sql, $data);
+    }
+
+    public function countAuthorComments($data)
+    {
+        $sql = 'SELECT COUNT(commentId) FROM comments where commentAuthor=:commentAuthor';
+        return $this->getColumn($sql, $data);
     }
 
     public function showPost($postId)
@@ -29,25 +59,24 @@ class ModelPosts extends Dbh
         $postId = $this->db->lastInsertId();
         file_put_contents('check_file.json', json_encode($file));
         $allowed_types = ['image/jpg', 'image/png', 'image/jpeg'];
-        $uploadDir = "img/postimages/";
-        if($file["post-img"]["size"] < 5000000){
-            if(in_array($file["post-img"]["type"] , $allowed_types)){
-                if($file["post-img"]["tmp_name"]){
-                    move_uploaded_file($file["post-img"]["tmp_name"], $uploadDir.$postId.".jpg");
-                    $sql = "UPDATE posts SET postImg=:postImg WHERE postId=:lastInsertedId;";
-                    $this->query($sql, $params=['postImg'=>'/'.$uploadDir.$postId.".jpg", 'lastInsertedId'=>$postId]);
+        $uploadDir = 'img/postimages/';
+        if ($file['post-img']['size'] < 5000000) {
+            if (in_array($file['post-img']['type'], $allowed_types)) {
+                if ($file['post-img']['tmp_name']) {
+                    move_uploaded_file($file['post-img']['tmp_name'], $uploadDir . $postId . '.jpg');
+                    $sql = 'UPDATE posts SET postImg=:postImg WHERE postId=:lastInsertedId;';
+                    $this->query($sql, $params = ['postImg' => '/' . $uploadDir . $postId . '.jpg', 'lastInsertedId' => $postId]);
                     return true;
-                }else{
+                } else {
                     return false;
                 }
-            }else{
+            } else {
                 return false;
             }
-        }else{
+        } else {
             return false;
         }
     }
-    
 
     public function findPost($query)
     {
@@ -126,7 +155,7 @@ class ModelPosts extends Dbh
         $totalLikes = $this->getRow($sql, $params)[0]['COUNT(postId)'];
         $sql = 'SELECT COUNT(postId) FROM postdislikes WHERE postId=:postId';
         $totalDisLikes = $this->getRow($sql, $params)[0]['COUNT(postId)'];
-        return $totalLikes-$totalDisLikes;
+        return $totalLikes - $totalDisLikes;
     }
 
     public function makeCommentLike($params = [])
@@ -173,6 +202,6 @@ class ModelPosts extends Dbh
         $totalLikes = $this->getRow($sql, $params)[0]['COUNT(commentId)'];
         $sql = 'SELECT COUNT(commentId) FROM commentdislikes WHERE commentId=:commentId';
         $totalDisLikes = $this->getRow($sql, $params)[0]['COUNT(commentId)'];
-        return $totalLikes-$totalDisLikes;
+        return $totalLikes - $totalDisLikes;
     }
 }
