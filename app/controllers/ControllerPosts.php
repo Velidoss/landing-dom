@@ -17,15 +17,15 @@ class ControllerPosts extends Controller
         $this->view = new View;
     }
 
-    public function actionPostlist()
+    public function actionPostlist($page=null)
     {
         if (isset($_SESSION['userId'])) {
             $modelUser = new ModelUser();
             $total = $this->model->countPosts();
-            $page = isset($_GET['page']) ? (int)$_GET['page'] :1;
-            $perpage =5 ;
+            $page = explode('/', $_SERVER['REQUEST_URI'])[3];
+            $perpage = 10 ;
             $pagination = new Paginationtest($page, $perpage, $total);
-            $start = $pagination->getStart();
+            $start = ($page- 1) * $perpage;
             $data = [];
             $data['posts'] = $this->model->showPostlist(['start'=>(int)$start, 'perpage'=>(int)$perpage]);
             $data['pagination'] = $pagination;

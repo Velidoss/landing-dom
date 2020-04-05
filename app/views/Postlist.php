@@ -30,11 +30,10 @@
             </div>
         <?php endforeach ; ?>
         <div class="section-postlist__pagination">
-                Постов: <?php echo count($data['posts']).' из '.$data['total'] ?>
                 <?php if($data['pagination']->countPages >1){ 
-                            $pagination->getHtml();
+                           echo $data['pagination'];
                  } ?>
         </div>
     </div>
 </section>
-<!-- postlist -->
+<!-- postlist -->   

@@ -27,7 +27,7 @@
                         <li><a href="/">Home</a></li>
                         <li><a href="/user/domainreg">Register domain name</a></li>
                         <li><a href="/user/account">Account</a></li>
-                        <li><a href="/posts/postlist">Posts</a></li>
+                        <li><a href="/posts/postlist/1">Posts</a></li>
                         <li><a href="/main/contact">Contact us</a></li>
                         <li>
                             <form action="/user/logout" method="POST">
@@ -59,7 +59,7 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/user/domainreg">Register domain name</a></li>
                 <li><a href="/user/account">Account</a></li>
-                <li><a href="/posts/postlist">Posts</a></li>
+                <li><a href="/posts/postlist/1">Posts</a></li>
                 <li><a href="/main/contact">Contact us</a></li>
                 <li>
                     <form action="/user/logout" method="POST">
@@ -82,7 +82,7 @@
             <div class="section-postmenu__nav">
                 <ul class="section-postmenu__nav-functions">
                     <li class="section-postmenu__nav-functions-item"><a href="/posts/makepost">Make a post</a></li>
-                    <li class="section-postmenu__nav-functions-item"><a href="/posts/postlist">Postlist</a></li>
+                    <li class="section-postmenu__nav-functions-item"><a href="/posts/postlist/1">Postlist</a></li>
                     <li class="section-postmenu__nav-functions-item"><a href="/posts/searchpost">Search a post</a></li>
                 </ul>
             </div>

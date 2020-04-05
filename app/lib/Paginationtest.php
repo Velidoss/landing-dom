@@ -10,14 +10,16 @@ class Paginationtest
     public $total;
     public $countPages;
     public $uri;
+    public $route;
 
     public function __construct($page, $perPage, $total)
     {
         $this->perPage = $perPage;
         $this->total = $total;
         $this->countPages = $this->getCountPages();
-        $this->currentPage = $this->getCurrentPage($page);
         $this->uri = $this->getParams();
+        $this->route = $this->getRoute();
+        $this->currentPage = $this->getCurrentPage($page);
     }
 
     public function __toString()
@@ -28,70 +30,80 @@ class Paginationtest
     public function getHtml()
     {
         $back = null;
-        $forward =null;
-        $startpage =null;
-        $endpage=null;
-        $page2Left=null;
-        $page1Left=null;
-        $page2Right=null;
-        $page1Right=null;
+        $forward = null;
+        $startpage = null;
+        $endpage = null;
+        $page2Left = null;
+        $page1Left = null;
+        $page2Right = null;
+        $page1Right = null;
 
-        if($this->currentPage >1){
-            $back = "<li><a class='nav-link' href='{$this->uri}page=".($this->currentPage - 1)."'>&lt;</a></li>";
+        //кнопка перехода на предыдующую страницу
+        if ($this->currentPage > 1) {
+            $back = "<li><a class='pagination-link' href='".$this->route ."/". ($this->currentPage - 1) . "'>&lt;</a></li>";
         }
-        if($this->currentPage < $this->countPages){
-            $forward = "<li><a class='nav-link' href='{$this->uri}page=".($this->currentPage + 1)."'>&gt;</a></li>";
+        //кнопка перехода на следующую страницу
+        if ($this->currentPage < $this->countPages) {
+            $forward = "<li><a class='pagination-link' href='".$this->route ."/". ($this->currentPage + 1) . "'>&gt;</a></li>";
         }
-        if($this->currentPage > 3){
-            $startpage = "<li><a class='nav-link' href='{$this->uri}page=1'>&laquo;</a></li>";
+        //кнопка перехода на первую страницу страницу
+        if ($this->currentPage > 3) {
+            $startpage = "<li><a class='pagination-link' href='".$this->route ."/1'>&laquo;</a></li>";
         }
-        if($this->currentPage < $this->countPages -2 ){
-            $endpage = "<li><a class='nav-link' href='{$this->uri}page=".($this->countPages)."'>&raquo;</a></li>";
+        //кнопка перехода на последнюю страницу
+        if ($this->currentPage < $this->countPages - 2) {
+            $endpage = "<li><a class='pagination-link' href='".$this->route ."/". ($this->countPages) . "'>&raquo;</a></li>";
         }
-        if($this->currentPage -2 > 0){
-            $page2Left = "<li><a class='nav-link' href='{$this->uri}page=".($this->currentPage - 2)."'>".($this->CurrentPage -2 )."</a></li>";
+        //кнопка перехода через одну предыдущую страницу с ее номером
+        if ($this->currentPage - 2 > 0) {
+            $page2Left = "<li><a class='pagination-link' href='".$this->route ."/". ($this->currentPage - 2) . "'>" . ($this->currentPage - 2) . '</a></li>';
         }
-        if($this->currentPage -1 > 0){
-            $page1Left = "<li><a class='nav-link' href='{$this->uri}page=".($this->currentPage - 1)."'>".($this->CurrentPage -1 )."</a></li>";
+        //кнопка переходана предыдущую страницу с ее номером
+        if ($this->currentPage - 1 > 0) {
+            $page1Left = "<li><a class='pagination-link' href='".$this->route ."/". ($this->currentPage - 1) . "'>" . ($this->currentPage - 1) . '</a></li>';
         }
-        if($this->currentPage +1 <= $this->countPages){
-            $page1Right = "<li><a class='nav-link' href='{$this->uri}page=".($this->currentPage + 1)."'>".($this->CurrentPage + 1 )."</a></li>";
+        if ($this->currentPage + 1 <= $this->countPages) {
+            $page1Right = "<li><a class='pagination-link' href='".$this->route ."/". ($this->currentPage + 1) . "'>" . ($this->currentPage + 1) . '</a></li>';
         }
-        if($this->currentPage +2 <= $this->countPages){
-            $page2Right = "<li><a class='nav-link' href='{$this->uri}page=".($this->currentPage + 2)."'>".($this->CurrentPage + 2 )."</a></li>";
+        if ($this->currentPage + 2 <= $this->countPages) {
+            $page2Right = "<li><a class='pagination-link' href='".$this->route ."/". ($this->currentPage + 2) . "'>" . ($this->currentPage + 2) . '</a></li>';
         }
 
-        return '<ul class="pagination">'.$startpage.$back.$page2Left.$page1Left.'<li class="active"><a>'.$this->currentPage.'</a></li>'.$page1Right.$page2Right.$forward.$endpage.'</ul>';
+        return '<ul class="pagination-menu">' . $startpage . $back . $page2Left . $page1Left . '<li class="pagination-active"><a>' . $this->currentPage . '</a></li>' . $page1Right . $page2Right . $forward . $endpage . '</ul>';
     }
 
     public function getCountPages()
     {
         return ceil($this->total / $this->perPage) ?: 1;
     }
+
     public function getCurrentPage($page)
     {
-        if(!$page || $page <1) $page = 1;
-        if($page < $this->countPages) $page = $this->countPages;
+        if (!$page || $page < 1) {
+            $page = 1;
+        }
+        if ($page > $this->countPages) {
+            $page = $this->countPages;
+        }
         return $page;
     }
 
     public function getStart()
     {
-        return ($this->currentPage - 1)* $this->perpage;
+        return ($this->currentPage - 1) * $this->perpage;
     }
+
     public function getParams()
     {
-        $url = $_SERVER['REQUEST_URI'];
-        $url = explode('?', $url);
-        $uri = $url[0].'?';
-        if(isset($url[1]) && $url[1] !=''){
-            $params = explode('&', $url[1]);
-            foreach($params as $param){
-                if (!preg_match('#page=#', $param)) $uri .="{$param}&amp;";
-            }
-        } 
+        $routes = explode('/', $_SERVER['REQUEST_URI']);
+        $uri = $routes[3];
         return $uri;
     }
-
+    public function getRoute()
+    {
+        $routes = explode('/', $_SERVER['REQUEST_URI']);
+        unset($routes[3]);
+        $route = implode('/', $routes);
+        return $route;
+    }
 }
-

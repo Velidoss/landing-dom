@@ -30,7 +30,7 @@
                         <li><a href="/">Home</a></li>
                         <li><a href="/user/domainreg">Register domain name</a></li>
                         <li><a href="/user/account">Account</a></li>
-                        <li><a href="/posts/postlist">Posts</a></li>
+                        <li><a href="/posts/postlist/1">Posts</a></li>
                         <li><a href="/main/contact">Contact us</a></li>
                         <li>
                             <form action="/user/logout" method="POST">
@@ -65,7 +65,7 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/user/about">Register domain name</a></li>
                 <li><a href="/user/account">Account</a></li>
-                <li><a href="/posts/postlist">Posts</a></li>
+                <li><a href="/posts/postlist/1">Posts</a></li>
                 <li><a href="/main/contact">Contact us</a></li>
                 <li>
                     <form action="/user/logout" method="POST">

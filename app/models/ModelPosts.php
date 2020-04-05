@@ -11,9 +11,9 @@ class ModelPosts extends Dbh
     public function showPostlist($limit=[])
     {
         if(empty($limit)){
-            $sql = 'SELECT * from posts order by postDateTime DESC ;';
+            $sql = 'SELECT * from posts order by postId DESC ;';
         }else{
-            $sql = 'SELECT * from posts order by postDateTime DESC LIMIT :start,:perpage';
+            $sql = 'SELECT * from posts order by postId DESC LIMIT :start,:perpage';
         }
         
         return $this->getRow($sql, $limit);

@@ -1092,6 +1092,31 @@ body {
             }
         }
     }
+    &__pagination{
+        @include section_paddings();
+        .pagination-menu{ 
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            .pagination-link{
+                padding: 20px;
+                border: 1px solid #fff;
+                text-decoration: none;
+                color:#c2c2c2;
+                background-color: #15a4fa;
+            }
+            .pagination-active{
+                a{
+                    padding: 20px;
+                    border: 1px solid #fff;
+                    text-decoration: none;
+                    color:#1a1717;
+                    background-color: #dbe7ee;
+                }
+
+            }
+        }
+    }
 }
 
 // === posts ===

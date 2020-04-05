@@ -2,9 +2,11 @@
 
 require_once 'app/models/ModelUser.php';
 require_once 'app/models/ModelPosts.php';
+require_once 'app/lib/Paginationtest.php';
 use app\core\View;
 use app\core\Controller;
 use app\models\ModelPosts;
+use app\lib\Paginationtest;
 
 class ControllerUser extends Controller
 {
@@ -38,9 +40,16 @@ class ControllerUser extends Controller
         if (isset($_SESSION['userId'])) {
             $postModel = new ModelPosts;
             $data = [];
+            $page = explode('/', $_SERVER['REQUEST_URI'])[3];
+            $perpage = 4 ;
+            $total = $this->model->countUserPosts(['postAuthorId' => $_SESSION['userId']]);
+            $postPagination = new Paginationtest($page, $perpage, $total);
+            $start = $postPagination->getStart();
             $data['domains'] = $this->model->selectDomains(['userId' => $_SESSION['userId']]);
             $data['userData'] = $this->model->selectUserData(['userId' => $_SESSION['userId']]);
-            $data['userPosts'] = $this->model->selectUserPosts(['userUid' => $_SESSION['userUid']]);
+            $data['userPosts'] = $this->model->selectUserPosts(['userUid' => $_SESSION['userUid']], ['start' => (int)$start, 'perpage' => (int)$perpage]);
+            var_dump($page, $postPagination->getCurrentPage($page), $start);
+            $data['post_pagination'] = $postPagination;
             $data['userComments'] = $this->model->selectUserComments(['userId' => $_SESSION['userId']]);
 
             for ($i = 0; $i < count($data['userPosts']); $i++) {

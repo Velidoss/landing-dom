@@ -1719,6 +1719,44 @@ body {
   margin-left: 15px;
 }
 
+.section-postlist__pagination {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+@media (max-width: 767px) {
+  .section-postlist__pagination {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+}
+
+.section-postlist__pagination .pagination-menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  list-style: none;
+}
+
+.section-postlist__pagination .pagination-menu .pagination-link {
+  padding: 20px;
+  border: 1px solid #fff;
+  text-decoration: none;
+  color: #c2c2c2;
+  background-color: #15a4fa;
+}
+
+.section-postlist__pagination .pagination-menu .pagination-active a {
+  padding: 20px;
+  border: 1px solid #fff;
+  text-decoration: none;
+  color: #1a1717;
+  background-color: #dbe7ee;
+}
+
 .section-postmenu {
   padding-top: 20px;
   padding-bottom: 20px;

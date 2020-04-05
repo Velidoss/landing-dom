@@ -1,6 +1,7 @@
 <!-- account-info -->
 <div class="section-outer section-account">
   <div class="section-inner">
+  <?php var_dump($data['post_pagination']) ?>
     <div class="section-account__userinfo">
       <div class="section-account__userinfo-img">
         <img src="/img/userimage/<?php echo $data['userImg']; ?> " alt="anon" />
@@ -78,13 +79,18 @@
           
             <div class="tab-item">
               <p class="post-title"><?php echo $post['postTitle'] ?></p>
-              <p class="post-category"><?php echo 'Category:'.$post['postCategory'].' .Posted on: '.$post['postDateTime'] ?><a href="/posts/post/<?php echo $post['postId'] ?>">Go to post</a> </p>
+              <p class="post-category"><?php echo 'Category:' . $post['postCategory'] . ' .Posted on: ' . $post['postDateTime'] ?><a href="/posts/post/<?php echo $post['postId'] ?>">Go to post</a> </p>
               <p class="post-content"><?php echo $post['postContent'] ?></p>
               <p class="post-likes">Likes: <?php echo $post['postlikes'] ?></p>
             </div>
           
         <?php endforeach ?>
         </div>
+        <?php
+          if ($data['post_pagination']->countPages > 1) {
+              echo $data['post_pagination'];
+          }
+        ?>
       </div>
       <div class="section-account__userstatistics-tabcontent" id="comments">
       <div class="section-account__userstatistics-tabcontent-comments">

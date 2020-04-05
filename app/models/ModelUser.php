@@ -188,18 +188,42 @@ class ModelUser extends Dbh
         return $result;
     }
 
-    public function selectUserPosts($data)
+    public function selectUserPosts($data, $limit = [])
     {
-        $sql = 'SELECT * FROM posts WHERE postAuthor=:userUid';
+        if (!empty($limit)) {
+            $sql = 'SELECT * FROM posts WHERE postAuthor=:userUid LIMIT :start, :perpage';
+            $data = array_merge($data, $limit);
+        } else {
+            $sql = 'SELECT * FROM posts WHERE postAuthor=:userUid';
+        }
+
         $result = $this->getRow($sql, $data);
         return $result;
     }
 
-    public function selectUserComments($data)
+    public function selectUserComments($data, $limit = [])
     {
-        $sql = 'SELECT * FROM comments WHERE commentAuthor=:userId';
+        if (!empty($limit)) {
+            $sql = 'SELECT * FROM comments WHERE commentAuthor=:userId LIMIT :start, :perpage';
+            $data = array_merge($data, $limit);
+        } else {
+            $sql = 'SELECT * FROM comments WHERE commentAuthor=:userId';
+        }
+
         $result = $this->getRow($sql, $data);
         return $result;
+    }
+
+    public function countUserPosts($data)
+    {
+        $sql = 'SELECT COUNT(postId) FROM posts WHERE postAuthorId=:postAuthorId';
+        return $this->getColumn($sql, $data);
+    }
+
+    public function countUserComments($data)
+    {
+        $sql = 'SELECT COUNT(commentId) FROM posts WHERE commentAuthor=:commentAuthor';
+        return $this->getColumn($sql, $data);
     }
 
     public function setImg($file)
